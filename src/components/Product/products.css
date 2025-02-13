@@ -1,0 +1,121 @@
+.productDetails-page{
+    margin: 0 15px;
+}
+.productBox .items-row{
+    display: flex;
+    flex-wrap: wrap;
+}
+.items-row .item-column{
+    margin: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    width: 20%;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    position: relative;
+}
+.items-row .item-column .item-url{
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    position: relative;
+}
+.items-row .item-column .item-url .item-brand{
+    color: var(--color-grey-900);
+    font-weight: bold;
+    font-size: 16px;
+}
+.items-row .item-column .item-url .item-name{
+    color: var(--color-grey-600);
+}
+.items-row .item-column .item-url .itemPriceBox{
+    display: flex;
+    gap: 5px;
+    font-size: 14px;
+    align-items: baseline;
+}
+.items-row .item-column .item-url .itemPriceBox .item-price{
+    color: var(--color-grey-900);
+    font-weight: bold;
+    font-size: 14px;
+}
+.items-row .item-column .item-url .itemPriceBox .item-discountPrice{
+    color: var(--color-grey-600);
+    font-size: 12px;
+    text-decoration: line-through;
+}
+.items-row .item-column .item-url .itemPriceBox .item-discount{
+    color: var(--color-red-700);
+    text-transform: uppercase;
+    font-size: 12px;
+}
+.pdp-rating-section {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-top: 20px;
+}
+.index-ratingBar-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.avg-rating-box{
+    display: flex;
+    font-size: 50px;
+    gap: 10px;
+}
+.avg-rating-star{
+    width: 35px;
+    height: 35px;
+}
+.rating-level-star{
+    width: 10px;
+    height: 10px;
+}
+.ratings-heading {
+    color: var(--color-grey-900);
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.line-separator {
+    margin: 0 40px;
+    border-left: 1px solid #eaeaec;
+    height: 88px;
+}
+.total-buyers {
+    color: #474d6a;
+    font-size: 12px;
+    text-align: center;
+}
+progress {
+    height: 5px;
+    border-radius: 5px;
+    background-color: #f3f3f3;
+}
+progress::-webkit-progress-bar {
+    background-color: #f3f3f3;
+    border-radius: 5px;
+}
+progress[data-rating="5"]::-webkit-progress-value{
+    background-color: #14958f;
+    border-radius: 5px;
+}
+progress[data-rating="4"]::-webkit-progress-value{
+    background-color: #14958f;
+    border-radius: 5px;
+}
+progress[data-rating="3"]::-webkit-progress-value{
+    background-color: #72bfbc;
+    border-radius: 5px;
+}
+progress[data-rating="2"]::-webkit-progress-value{
+    background-color: #fcb301;
+    border-radius: 5px;
+}
+progress[data-rating="1"]::-webkit-progress-value{
+    background-color: #f16565;
+    border-radius: 5px;
+}

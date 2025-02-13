@@ -1,0 +1,39 @@
+.profile-page {
+    max-width: 980px;
+    margin: 0 auto;
+}
+.profile-container {
+    width: 76%;
+    margin: auto;
+}
+.profile-card{
+    padding: 42px 130px;
+    text-align: justify;
+    border: 1px solid #d2d2d8;
+}
+.profile-info-label{
+    color: var(--color-grey-900);
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0 24px;
+}
+table.profile-infoTable {
+    margin: 25px 0 25px 0;
+    padding: 0 24px;
+}
+.profile-infoTable tr{
+    height: 45px;
+    color: var(--color-grey-900);
+    text-transform: capitalize;
+}
+.profile-infoTable td{
+    width: 200px;
+    padding: 0 4px;
+}
+.profile-card .primary-btn{
+    width: 100%;
+}
+.profile-infoTable tbody tr:nth-child(2){
+    text-transform: none;
+}
+
