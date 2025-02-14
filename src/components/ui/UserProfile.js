@@ -24,7 +24,7 @@ function UserProfile({onLogout, userLoggingOut}) {
             <NavLink onClick={() => onLogout()} className="drpdwn-link logout">
               <HiOutlineArrowRightOnRectangle />
               <span>Logout</span>
-              {!userLoggingOut && <SpinnerMini />}
+              {userLoggingOut && <SpinnerMini />}
             </NavLink>
           )}
         </div>
