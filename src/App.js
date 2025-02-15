@@ -81,17 +81,8 @@ function App() {
     </SelectAddressContextProvider>
     </CartEntryCountProvider>
     </SearchProductContextProvider>
-      </QueryClientProvider>
+    </QueryClientProvider>
   )
 }
 
 export default App;
-
-
-//creating rating column in orders table
-
-//creating review column in orders table as object with keys review and date
-
-//creating rating column in products table as object with keys from 1 to 5
-
-//creating review column in products table as object with keys, review, userName, date

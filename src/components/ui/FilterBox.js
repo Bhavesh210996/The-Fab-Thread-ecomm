@@ -50,7 +50,7 @@ function FilterBox() {
       });
     }) : productData;
 
-    const filteredData = searchQueryData?.length > 0 ? searchQueryData : productData ? productData : productsList;
+    const filteredData = searchQueryData?.length > 0 ? searchQueryData : productData?.length > 0 ? productData : productsList;
 
     //filter by brand
     let selectedBrandProducts;

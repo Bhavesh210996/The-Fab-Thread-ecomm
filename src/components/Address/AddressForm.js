@@ -137,8 +137,8 @@ function AddressForm({editFormData = {}, setFormData, editId, onCloseModal}) {
 
                 {!pincodeData ? (
                     <FormRow>
-                    <Input type="text" name="locality" placeholder="Locality/Town*" elRef={(el) => (ref.current[3] = el)} value={locality} onChange={handleChange}/>
-                    <FormError>Required</FormError>
+                        <Input type="text" name="locality" placeholder="Locality/Town*" elRef={(el) => (ref.current[3] = el)} value={locality} onChange={handleChange}/>
+                        <FormError>Required</FormError>
                     </FormRow>
                 ) : (
                 <select id="locality-drpdwn" className="add-input-field" name="locality" placeholder="Locality/Town*">

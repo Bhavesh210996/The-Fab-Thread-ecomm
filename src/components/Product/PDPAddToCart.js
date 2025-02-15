@@ -10,6 +10,7 @@ import SelectPincode from "./SelectPincode";
 import { useAddreses } from "../Address/useAddreses";
 import PriceBox from "../ui/PriceBox";
 import { HiShoppingBag } from "react-icons/hi2";
+import LoginForm from "../ui/LoginForm";
 
 function PDPAddToCart({productData}) {
     const [selectedSize, setSelectedSize] = useState();
@@ -19,17 +20,17 @@ function PDPAddToCart({productData}) {
     const [selectedAddress, setSelectedAddress] = useState();
 
     const navigate = useNavigate();
+    const {isAuthenticated} = useUser();
 
     const {id, itemName, brand, price, discountPrice, discount, quantity, size } = productData
     const {cartEntries, isEntriesLoading} = useCartEntries();
-    const {addToCartFn, isAddingCart} = useAddToCart();
     const {user} = useUser();
     const currentUseradd = {field:"userId" , value: user?.id}
     const {addreses, isAddressLoading} = useAddreses(currentUseradd);
+    const {addToCartFn, isAddingCart} = useAddToCart();
 
     useEffect(() =>{
         const entry = cartEntries?.filter((entry) => entry.productId === id && entry.productSize === selectedSize && user?.id === entry.userId);
-        console.log(entry);
         setProductInCart(entry);
         setIsAddedToCart(false)
     }, [selectedSize])
@@ -39,15 +40,16 @@ function PDPAddToCart({productData}) {
             const filterAddress = addreses?.filter((curr) => curr.id === selectedPin)
             const value = selectedPin ? `${filterAddress?.[0].address.pincode} (${filterAddress?.[0].address.userName})` :
             `${addreses?.[0].address.pincode} (${addreses?.[0].address.userName})`
-            setSelectedAddress(value)
+            setSelectedAddress(value);
             setSelectedPin(!selectedPin ? addreses?.[0].id : selectedPin);       
         }
     }, [selectedPin, addreses])
 
     function handleAddToCart(){
         if(!selectedSize) return document.querySelector(".size-error").classList.remove("hide");
-        
-        setIsAddedToCart(!isAddedToCart)
+        if(!isAuthenticated) return navigate("/login");
+
+        setIsAddedToCart(!isAddedToCart);
         let cartEntry;
         if(productInCart.length > 0){
             cartEntry = {
@@ -84,8 +86,8 @@ function PDPAddToCart({productData}) {
                 <div className="size-container">
                     <span className="size-error hide">Please select a size</span>
                     <div className="size-buttons">
-                        {Object.keys(size).map((val) => (
-                            <button type="button" 
+                        {Object.keys(size).map((val, index) => (
+                            <button key={index} type="button" 
                                 className={`sizeButton 
                                 ${selectedSize === val ? "selectedSize" : ""}`} 
                                 onClick={() => {
@@ -101,6 +103,19 @@ function PDPAddToCart({productData}) {
             </div>
             <div className="addtoCart-btn-box">
                 {!isAddedToCart ? (
+                    !isAuthenticated ? 
+                    <Modal>
+                        <Modal.Open opens="login">
+                            <Button onClick={handleAddToCart} disabled={isAddingCart}>
+                                <HiShoppingBag />
+                                <span>Add To Cart</span>
+                            </Button> 
+                        </Modal.Open>
+                        <Modal.Window name="login">
+                            <LoginForm isPopupSession="true"/>
+                        </Modal.Window>
+                    </Modal>
+                    :
                     <Button onClick={handleAddToCart} disabled={isAddingCart}>
                         <HiShoppingBag />
                         <span>Add To Cart</span>

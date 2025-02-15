@@ -9,10 +9,8 @@ import PDPReview from "../components/Product/PDPReview";
 
 function ProductDetailsPage() {
     const {productId} = useParams();
-    console.log(productId)
-
     const {productsList, isProductsListLoading} = useProductList([]);
-
+    
     if(isProductsListLoading) return <Spinner />
 
     const productData = productsList.filter((item) => item.id === Number(productId));

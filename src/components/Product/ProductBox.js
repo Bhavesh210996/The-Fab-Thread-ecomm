@@ -10,9 +10,7 @@ function ProductBox() {
     const [searchParams] = useSearchParams();
     const {searchQuery} = useSearchQuery();
     const {categoryName} = useParams();
-    const location = useLocation();
-    console.log(location)
-    
+        
     //Filter
     const brandParam = searchParams.get("brand")?.split("%");
     const colorParam = searchParams.get("color")?.split("%");
@@ -50,7 +48,7 @@ function ProductBox() {
     }
     
     //search results
-    const searchQueryData = searchQuery ? productsList.filter((item) => {
+    const searchQueryData = searchQuery ? productsList?.filter((item) => {
         const queryTerms = searchQuery.toLowerCase().split(" ").map(term => term.trim());
     
       return queryTerms.every((term) => {
@@ -62,7 +60,7 @@ function ProductBox() {
       });
     }) : productData;
 
-    const filteredData = searchQueryData?.length > 0 ? searchQueryData : productData ? productData : productsList;
+    const filteredData = searchQueryData?.length > 0 ? searchQueryData : productData?.length > 0 ? productData : productsList;
 
     
     const preloadImages = (products) => {

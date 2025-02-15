@@ -20,11 +20,11 @@ function AddressList() {
             <Modal>
                 <div className="add-new-address-box">
                     <h3>Select Delivery Address</h3>
-                    <Modal.Open opens="new">
+                    <Modal.Open opens="newadd">
                         <button type="button" id="addNewAddress">Add New Address</button>
                     </Modal.Open>
                 </div>
-                <Modal.Window name="new">
+                <Modal.Window name="newadd">
                     <AddressForm />
                 </Modal.Window>
             </Modal>
