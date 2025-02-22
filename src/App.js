@@ -1,28 +1,31 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css';
-import AppLayout from './components/AppLayout';
-import './style/style.css'
-import MenFashion from './pages/MenFashion';
-import Homepage from './pages/Homepage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Toaster } from 'react-hot-toast';
+
+import './App.css';
+import './style/style.css'
+
+import AppLayout from './components/AppLayout';
+import MenFashion from './pages/MenFashion';
+import Homepage from './pages/Homepage';
 import WomenFashion from './pages/WomenFashion';
 import MensCasualWear from './pages/category-pages/MensCasualWear';
 import ProductDetailsPage from './pages/ProductDetailsPage';
-import { Toaster } from 'react-hot-toast';
 import Cart from './pages/Cart';
-import { CartEntryCountProvider } from './context/CartEntryCountContextApi';
 import Address from './pages/Address';
 import Payment from './pages/Payment';
 import OrderConfirmation from './pages/OrderConfirmation';
 import Login from './pages/Login';
 import ProtectedRoute from './components/ui/ProtectedRoute';
-import { SelectAddressContextProvider } from './context/SelectAddressContextApi';
 import YourOrders from './pages/YourOrders';
-import { SearchProductContextProvider } from './context/SearchProductContextApi';
 import Profile from './pages/Profile';
 import SignUp from './pages/SignUp';
 import ScrollToTop from './components/ui/ScrollToTop';
+
+import { SearchProductContextProvider } from './context/SearchProductContextApi';
+import { SelectAddressContextProvider } from './context/SelectAddressContextApi';
+import { CartEntryCountProvider } from './context/CartEntryCountContextApi';
 
 const queryClient = new QueryClient({
   defaultOptions: {

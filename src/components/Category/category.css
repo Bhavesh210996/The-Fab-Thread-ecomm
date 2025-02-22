@@ -103,10 +103,10 @@
     color: var(--color-grey-500);
     margin-top: 2px;
 }
-.category-page .spinner{
+/* .category-page .spinner{
     width: 4.4rem;
     height: 4.4rem;
-}
+} */
 .menFashion-page {
     margin: 0 20px;
 }
