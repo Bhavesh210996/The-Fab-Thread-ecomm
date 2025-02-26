@@ -5,12 +5,16 @@ import AddressForm from "./AddressForm";
 import ConfirmDelete from "../ui/ConfirmDelete";
 import { useRemoveAddress } from "./useRemoveAddress";
 import AddressDetails from "./AddressDetails";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectAddress } from "../../context/CartSlice";
 
 function AddressBox({address, defaultAddress}) {
     const [formData, setFormData] = useState({});
     const [editId, setEditId] = useState();
+    const dispatch = useDispatch();
 
-    const {selectedAddress, setSelectAddress} = useSelectedAddress();
+    // const {selectedAddress, setSelectAddress} = useSelectedAddress();
+    const {selectedAddress} = useSelector((store) => store.cartStates)
     const {deletetingAddressFn, isDeleting} = useRemoveAddress();
 
     const addressDetails = address?.address
@@ -29,7 +33,7 @@ function AddressBox({address, defaultAddress}) {
     return (
         <div className="addressBlock">
             <div>
-                <input type="radio" className="address-radio" checked={selectedAddress ? Number(selectedAddress) === address.id : false} value={address.id} onChange={() => setSelectAddress(address.id)}/>
+                <input type="radio" className="address-radio" checked={selectedAddress ? Number(selectedAddress) === address.id : false} value={address.id} onChange={() => dispatch(setSelectAddress(address.id))}/>
             </div>
             <div>
                 <AddressDetails addressDetails={addressDetails} />

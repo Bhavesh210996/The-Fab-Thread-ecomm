@@ -1,11 +1,12 @@
 import { NavLink, useNavigate } from "react-router-dom"
 import { HiUser, HiShoppingBag, HiHeart } from "react-icons/hi2";
 import SearchBox from "./SearchBox"
-import { useCartCount } from "../../context/CartEntryCountContextApi";
+// import { useCartCount } from "../../context/CartEntryCountContextApi";
 import { useState } from "react";
 import { useUser } from "../Authentication/useUser";
 import { useLogout } from "../Authentication/useLogout";
 import UserProfile from "../ui/UserProfile";
+import useCartCount from "../../Hooks/useCartCount";
 
 function NavBar() {
   const [isDrpDwnOpen, setIsDrpDwnOpen] = useState(null);

@@ -1,5 +1,5 @@
 import { useParams, useSearchParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useProductList } from "../Product/useProductList"
 
 import Filter from "./Filter";
 import { useSearchQuery } from "../../context/SearchProductContextApi";
@@ -9,12 +9,11 @@ function FilterBox() {
     const {searchQuery} = useSearchQuery();
     const {categoryName} = useParams();
 
-    //Filter
     const brandParam = searchParams.get("brand")?.split("%");
     const colorParam = searchParams.get("color")?.split("%");
 
     //fetch the product data
-    const {productsList} = useSelector((store) => store.products);
+    const {productsList, isProductsListLoading} = useProductList();
 
     let productData;
     //category results

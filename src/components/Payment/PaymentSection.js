@@ -13,6 +13,8 @@ import { useDeletingEntry } from "../Cart/useDeletingEntry";
 import { useOrders } from "../Orders/useOrders";
 import { useNavigate } from "react-router-dom";
 import { HiBanknotes, HiCreditCard } from "react-icons/hi2";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectAddress } from "../../context/CartSlice";
 
 function PaymentSection({totalCartPrice}) {
     const [selectedOption, setSelectedOption] = useState("cod");
@@ -23,7 +25,10 @@ function PaymentSection({totalCartPrice}) {
     const queryClient = useQueryClient();
 
     const {user} = useUser();
-    const {selectedAddress, setSelectAddress} = useSelectedAddress();
+    // const {selectedAddress, setSelectAddress} = useSelectedAddress();
+    const {selectedAddress} = useSelector((store) => store.cartStates)
+    const dispatch = useDispatch();
+
     const {orders, isLoading} = useOrders();
     const {addreses} = useAddreses();
     const findSelectedAddress = addreses?.filter((addreses) => addreses.id === Number(selectedAddress));
@@ -83,7 +88,7 @@ function PaymentSection({totalCartPrice}) {
                 queryClient.setQueryData(["orders"], data)
                 navigate(`/orderConfirmation/${orderNumber}`);
             }});
-        setSelectAddress("")
+        dispatch(setSelectAddress(""));
     }
 
     return (

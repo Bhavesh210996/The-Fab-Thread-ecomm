@@ -1,21 +1,30 @@
 import { useParams, useSearchParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-
-import Filter from "./Filter";
+import Spinner from "../ui/Spinner";
+import ProductCard from "./ProductCard"
+import { useProductList } from "./useProductList"
 import { useSearchQuery } from "../../context/SearchProductContextApi";
+import { useEffect, useState } from "react";
 
-function FilterBox() {
+function ProductBox() {
+    const [imagesLoaded, setImagesLoaded] = useState();
     const [searchParams] = useSearchParams();
     const {searchQuery} = useSearchQuery();
     const {categoryName} = useParams();
-
+        
     //Filter
     const brandParam = searchParams.get("brand")?.split("%");
     const colorParam = searchParams.get("color")?.split("%");
+    const filters = [];
 
-    //fetch the product data
-    const {productsList} = useSelector((store) => store.products);
+    if(brandParam){
+        filters.push({field: "brand", value: brandParam})
+    }
+    if(colorParam){
+        filters.push({field: "color", value: colorParam})
+    }
 
+    const {productsList, isProductsListLoading} = useProductList(filters);
+    
     let productData;
     //category results
     const categoryFilter = productsList?.filter(item => item.categoryName === categoryName.toLowerCase());
@@ -37,7 +46,7 @@ function FilterBox() {
             })
         }) : "";
     }
-
+    
     //search results
     const searchQueryData = searchQuery ? productsList?.filter((item) => {
         const queryTerms = searchQuery.toLowerCase().split(" ").map(term => term.trim());
@@ -53,52 +62,34 @@ function FilterBox() {
 
     const filteredData = searchQueryData?.length > 0 ? searchQueryData : productData?.length > 0 ? productData : productsList;
 
-    //filter by brand
-    let selectedBrandProducts;
-    let brandKey;
-    if(colorParam){
-        selectedBrandProducts = filteredData?.filter((item) => colorParam.includes(item.color))
-        brandKey = [...new Set(selectedBrandProducts?.map((item) => item.brand))]
-    }else{
-        brandKey = [...new Set(filteredData?.map((item) => item.brand))]    
+    
+    const preloadImages = (products) => {
+        return Promise.all(
+            products?.map((product) => 
+                new Promise((resolve) => {
+                    const img = new Image();
+                    img.src = product.itemImage;
+                    img.onload = resolve;
+                    img.onerror = resolve;
+                })
+            )
+        )
     }
     
-    //filter by color
-    let selectedColorProducts;
-    let colorsKey;
-    if(brandParam){
-        selectedColorProducts = filteredData?.filter((item) => brandParam.includes(item.brand));
-        colorsKey = [...new Set(selectedColorProducts?.map((item) => item.color))]
-    }else{
-        colorsKey = [...new Set(filteredData?.map((item) => item.color))]
-    }
+    useEffect(() => {
+        if(filteredData)
+            preloadImages(filteredData).then(() => setImagesLoaded(true))
+    }, [filteredData])
 
-    //filter by price
-
-
-    //filter by discount
-
-    // if(!isMenProductsLoading) return <Spinner />
+    if(isProductsListLoading || !imagesLoaded) return <Spinner />
 
     return (
-        <div className="filterBox">
-            <div className="filter-heading">
-             <p>Filters</p>
-            </div>
-            <div className="filters-container">
-                <Filter type="brand" filterData={brandKey} filterField="brand" products={selectedBrandProducts ? selectedBrandProducts : filteredData}/>
-                <Filter type="color" filterData={colorsKey} filterField="color" products={selectedColorProducts ? selectedColorProducts : filteredData}/>
-
-                {/* <div className="filter-price">
-                    Price Range
-                </div>
-
-                <div className="filter-discount">
-                    Discount
-                </div> */}
+        <div className="productBox">
+            <div className="items-row">
+                {filteredData?.map((item) => <ProductCard key={item.id} item={item}/>)}
             </div>
         </div>
     )
 }
 
-export default FilterBox
+export default ProductBox

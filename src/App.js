@@ -10,7 +10,7 @@ import AppLayout from './components/AppLayout';
 import MenFashion from './pages/MenFashion';
 import Homepage from './pages/Homepage';
 import WomenFashion from './pages/WomenFashion';
-import MensCasualWear from './pages/category-pages/MensCasualWear';
+import ProductListingPage from './pages/category-pages/ProductListingPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import Cart from './pages/Cart';
 import Address from './pages/Address';
@@ -39,8 +39,8 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <SearchProductContextProvider>
-      <CartEntryCountProvider>
-      <SelectAddressContextProvider>
+      {/* <CartEntryCountProvider> */}
+      {/* <SelectAddressContextProvider> */}
       <ReactQueryDevtools initialIsOpen={false} />
       <BrowserRouter>
       <ScrollToTop />
@@ -48,7 +48,7 @@ function App() {
 
           <Route element={<AppLayout />}>
             <Route index element={<Homepage />} />
-            <Route path=':categoryName' element={<MensCasualWear />} />
+            <Route path=':categoryName' element={<ProductListingPage />} />
             <Route path='men' element={<MenFashion />} />
             <Route path='women' element={<WomenFashion />} />
             <Route path=':productType/:brand/:productName/:productId' element={<ProductDetailsPage />} />
@@ -81,8 +81,8 @@ function App() {
           color: "var(--color-grey-700)"
         }
       }} />
-    </SelectAddressContextProvider>
-    </CartEntryCountProvider>
+    {/* </SelectAddressContextProvider> */}
+    {/* </CartEntryCountProvider> */}
     </SearchProductContextProvider>
     </QueryClientProvider>
   )

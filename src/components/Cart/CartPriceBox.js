@@ -6,17 +6,16 @@ import { useSelectedAddress } from "../../context/SelectAddressContextApi";
 import Button from "../ui/Button";
 import OrderPriceBox from "./OrderPriceBox";
 import { PLATFORM_FEE, SHIPPING_FEE } from "../../Utils/Constants";
-
-// const PLATFORM_FEE = 20;
-// const SHIPPING_FEE = 99;
+import { useSelector } from "react-redux";
 
 function CartPriceBox({type, setTotalCartPrice}) {
     const navigate = useNavigate();
-    const {selectedAddress} = useSelectedAddress();
+    // const {selectedAddress} = useSelectedAddress();
+    const {selectedAddress} = useSelector((store) => store.cartStates)
     const {cartEntries, isEntriesLoading} = useCartEntries();
     const {user} = useUser();
     
-    const currentUserEntries = cartEntries.filter((entry) => entry.userId === user?.id);
+    const currentUserEntries = cartEntries?.filter((entry) => entry.userId === user?.id);
 
     const priceWithoutDiscount = currentUserEntries?.reduce((acc, curr) => acc + (curr.products?.discountPrice * curr.quantity || 0), 0);
     const priceWithDiscount = currentUserEntries?.reduce((acc, curr) => acc + (curr.products?.price * curr.quantity || 0), 0)
