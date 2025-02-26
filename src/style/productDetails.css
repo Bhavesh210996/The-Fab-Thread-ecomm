@@ -291,8 +291,6 @@ li.availability-row {
     width: 9px;
 }
 .user-review-star-wrapper {
-    width: 5%;
-    height: 0%;
     background-color: #14958f;
     color: #fff;
     border-radius: 5px;
@@ -300,6 +298,8 @@ li.availability-row {
     font-size: 12px;
     margin-top: 5px;
     font-weight: bold;
+    width: 5%;
+    height: 0%;
 }
 .review-text{
     color: var(--color-grey-900);
