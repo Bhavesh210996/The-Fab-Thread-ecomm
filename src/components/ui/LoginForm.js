@@ -8,6 +8,7 @@ import Logo from "../Header/Logo";
 import { NavLink, useNavigate } from "react-router-dom";
 import SignUpForm from "../Account/SignUpForm";
 import { useQueryClient } from "@tanstack/react-query";
+import SpinnerMini from "./SpinnerMini";
 
 function LoginForm({isPopupSession, onCloseModal}) {
     const [email, setEmail] = useState("");
@@ -81,8 +82,8 @@ function LoginForm({isPopupSession, onCloseModal}) {
           </div>
           <div className="login-btn-block">
             <button type="submit" id="login-btn">Login</button>
+            {isLoggingIn && <SpinnerMini type="login"/>}
           </div>
-          {isLoggingIn && <Spinner type="login"/>}
         </form>
         <div className="signup-link auth-link">
           {isPopupSession === "true" ? 

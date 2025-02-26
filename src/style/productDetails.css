@@ -287,6 +287,9 @@ li.availability-row {
 .user-review-star-wrapper.star-1{
     background-color: #f16565;
 }
+.pdp-review-star{
+    width: 9px;
+}
 .user-review-star-wrapper {
     width: 5%;
     height: 0%;
@@ -297,9 +300,6 @@ li.availability-row {
     font-size: 12px;
     margin-top: 5px;
     font-weight: bold;
-}
-.pdp-review-star{
-    width: 9px;
 }
 .review-text{
     color: var(--color-grey-900);

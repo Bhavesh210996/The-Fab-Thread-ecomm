@@ -113,6 +113,9 @@ function SignUpForm({isPopupSession, onClose}) {
                         <input type="password" className="input-field" name="passwordConfirm" placeholder="Repeat Password" ref={(el) => (ref.current[4] = el)}/>
                         <span className="error-box hide">Required</span>
                     </div>
+                    <div className="termsCondition-block">
+                        <p>By continuing, you agree to FabThread's <span>Terms of Use</span> & <span>Privacy Policy</span></p>
+                    </div>
                     <button className="signup-btn">Sign Up</button>
                     {isSigningUp && <Spinner type="signup"/>}
                 </div>

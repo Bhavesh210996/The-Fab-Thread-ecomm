@@ -26,16 +26,15 @@ export const passwordValidationFn = (sibling, value, setPassword) => {
 
 export function resizeImage(file, callback) {
   FileResizer.imageFileResizer(
-    file,            // input file
-    800,             // max width
-    600,             // max height
-    'JPEG',          // output format
-    70,              // quality (0-100)
-    0,               // rotation (0, 90, 180, 270)
+    file,            
+    800,             
+    600,             
+    'JPEG',          
+    70,              
+    0,               
     (uri) => {
-      // The resized image will be passed to the callback
       callback(uri);
     },
-    'base64'         // output type (can be 'base64', 'blob', etc.)
+    'base64'
   );
 }

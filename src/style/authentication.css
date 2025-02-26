@@ -15,7 +15,7 @@
     width: 50vw;
 }
 #loginForm{
-    padding: 2rem 3rem 0 3rem;
+    padding: 0 3rem 0 3rem;
     background-color: var(--color-grey-0);
     border: 1px solid var(--color-grey-100);
     border-radius: var(--border-radius-md);
@@ -96,6 +96,32 @@ label{
     color: var(--color-grey-900);
     font-weight: bold;
 }
+.login-btn-block{
+    position: relative;
+}
+.login-btn-block svg{
+    position: absolute;
+    right: 160px;
+    top: 19px;
+    color: #ffffff;
+}
+.termsCondition-block{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+}
+.termsCondition-block #terms-checkbox{
+    width: 15px;
+    height: 15px;
+}
+.termsCondition-block p{
+    margin: 0;
+}
+.termsCondition-block span{
+    color: #f16565;
+    font-weight: bold;
+}
 
 /* signup form */
 .signup-page {
@@ -148,7 +174,6 @@ label{
     border: none;
     border-radius: var(--border-radius-sm);
     box-shadow: var(--shadow-sm);
-    margin-top: 10px;
     cursor: pointer;
     text-transform: uppercase;
     &:hover {
