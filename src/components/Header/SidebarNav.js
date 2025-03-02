@@ -29,7 +29,7 @@ function SidebarNav() {
                                 <HiUser />
                             </div>
                             <div className="sidebar-user-name">
-                              <NavLink className="sidebar-drpdwn-link userprofile" to="/profile">
+                              <NavLink className="sidebar-drpdwn-link userprofile" to="/profile" onClick={() => dispatch(toggleSidebar(false))}>
                                 <span>{fullName ? fullName : "FabThread User"}</span>
                                 <HiMiniChevronRight />
                               </NavLink>
@@ -38,13 +38,13 @@ function SidebarNav() {
                         <div className="navUl-section">
                             <ul className="nav__list">
                                 <li className="nav__item">
-                                  <button className="nav__btn nav__btn--add-recipe" onClick={() => navigate("/men")}>
+                                  <button className="nav__btn nav__btn--add-recipe" onClick={() => {navigate("/men"); dispatch(toggleSidebar(false))}}>
                                     <span>Men</span>
                                     <HiMiniChevronRight />
                                   </button>
                                 </li>
                                 <li className="nav__item">
-                                  <button className="nav__btn nav__btn--bookmarks" onClick={() => navigate("/women")}>
+                                  <button className="nav__btn nav__btn--bookmarks" onClick={() => {navigate("/women"); dispatch(toggleSidebar(false))}}>
                                     <span>Women</span>
                                     <HiMiniChevronRight />
                                   </button>
@@ -60,15 +60,15 @@ function SidebarNav() {
                         <div className="userSpecific-section">
                             <ul className="nav__list">
                                 <li>
-                                    <NavLink className="drpdwn-link userOrders" to="orders">
+                                    <NavLink className="drpdwn-link userOrders" to="orders" onClick={() => dispatch(toggleSidebar(false))}>
                                       <span>Your Orders</span>
                                     </NavLink>
                                 </li>
                                 <li>
                                 {!isAuthenticated ? (
-                                      <NavLink className="drpdwn-link login" to="login">Login</NavLink>
+                                      <NavLink className="drpdwn-link login" to="login" onClick={() => dispatch(toggleSidebar(false))}>Login</NavLink>
                                     ) : (
-                                      <NavLink onClick={() => logout()} className="drpdwn-link logout">
+                                      <NavLink onClick={() => {logout(); dispatch(toggleSidebar(false))}} className="drpdwn-link logout">
                                         <span>Logout</span>
                                         {userLoggingOut && <SpinnerMini />}
                                       </NavLink>
