@@ -15,6 +15,7 @@
 --color-grey-100: #f3f4f6;
 --color-grey-200: #e5e7eb;
 --color-grey-300: #d1d5db;
+--color-grey-350: #e4e4e4;
 --color-grey-400: #9ca3af;
 --color-grey-500: #6b7280;
 --color-grey-600: #4b5563;
@@ -22,6 +23,7 @@
 --color-grey-800: #1f2937;
 --color-grey-900: #111827;
 --color-grey-950: #282c3f;
+
 
 --color-blue-100: #e0f2fe;
 --color-blue-700: #0369a1;
@@ -106,6 +108,9 @@ body{
     min-height: calc(100vh - 8vw);
     /* height: 100vh; */   
 }
+body.no-scroll{
+  overflow: hidden;
+}
 /* .container{
     display: grid;
     grid-template-columns: 26rem 1fr;
@@ -137,7 +142,7 @@ body{
   }
 } */
 main{
-  margin-top: 65px;
+  margin-top: 60px;
 }
 .spinner {
   margin: 12rem auto;
@@ -377,4 +382,48 @@ input:disabled {
 .offer-banner .banner-img {
   height: 100%;
   width: 100%;
+}
+
+/* media query */
+@media (max-width: 1023px){
+  .homepage{
+    margin-top: 135px;
+  }
+  .homepage-offer-banner{
+    height: unset;
+    margin: 0;
+  }
+  .him-box, .her-box {
+    display: inline-block;
+    width: 25px;
+    height: 20px;
+  }
+  .him-box {
+    position: absolute;
+    left: 30%;
+    bottom: 45px;
+  }
+  .her-box {
+    position: absolute;
+    right: 40%;
+    bottom: 44px;
+  }
+  .him-btn, .her-btn{
+    font-size: 14px;
+    padding: 5px;
+  }
+  .homepage .category-base-container .column-compo{
+    width: unset;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1199px) {
+  nav .nav__list{
+    margin-left: 0;
+  }
+  form.search{
+    margin: 0 0 0 5px;
+  }
+  form.search input{
+    width: 17rem;
+  }
 }

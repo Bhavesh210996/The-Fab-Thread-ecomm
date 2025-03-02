@@ -4,6 +4,9 @@
     margin: auto;
     max-width: 950px;
 }
+.cart-page{
+    margin-top: 133px;
+}
 .empty-cart{
     margin: auto;
     color: var(--color-grey-900);
@@ -194,7 +197,9 @@ input:focus-visible {
 }
 
 /* address page */
-
+.address-page{
+    margin-top: 133px;
+}
 .address-container{
     display: flex;
     padding: 0 10px;
@@ -341,6 +346,9 @@ input:focus-visible {
     cursor: pointer;
 }
 /* payment page */
+.payment-page{
+    margin-top: 133px;
+}
 .paymentOptions-block{
     width: 100%;
     border: 1px solid #eaeaec;

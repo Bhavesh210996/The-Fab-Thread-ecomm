@@ -19,6 +19,7 @@
     "react-image": "^4.1.0",
     "react-image-file-resizer": "^0.4.8",
     "react-redux": "^9.2.0",
+    "react-responsive": "^10.0.0",
     "react-router-dom": "^6.28.1",
     "react-scripts": "5.0.1",
     "styled-components": "^6.1.14"
