@@ -1,5 +1,7 @@
+import { useMediaQuery } from "react-responsive";
 
 function Button({children, disabled, onClick, type}) {
+  const isMobile = useMediaQuery({maxWidth: 1023})
   let style;
 
   if(type === "cart"){
@@ -13,7 +15,7 @@ function Button({children, disabled, onClick, type}) {
       border: "1px solid #acacb8",
       display: "flex",
       justifyContent: "space-between",
-      width: "50%",
+      width: isMobile ? "100%" : "50%",
       alignItems: "center"
     }
   }

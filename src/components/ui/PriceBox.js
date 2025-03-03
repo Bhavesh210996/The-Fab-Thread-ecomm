@@ -1,15 +1,17 @@
+import { useMediaQuery } from "react-responsive";
 import { formatCurrency } from "../../Utils/helpers"
 
 const PriceBox = ({price, discountPrice, discount, type}) => {
+    const isMobile = useMediaQuery({maxWidth: 1023})
     let priceStyle;
     let discountStyle;
 
     if(type === "pdp"){
         priceStyle = {
-            fontSize : "22px",
+            fontSize : isMobile ? "18px" : "22px",
         }
         discountStyle = {
-            fontSize: "20px"
+            fontSize: isMobile ? "16px" : "20px"
         }
     }else{
         priceStyle = {

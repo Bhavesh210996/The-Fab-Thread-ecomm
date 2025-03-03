@@ -6,11 +6,16 @@ import PDPAddToCart from "../components/Product/PDPAddToCart";
 import PDPDetails from "../components/Product/PDPDetails";
 import PDPRating from "../components/Product/PDPRating";
 import PDPReview from "../components/Product/PDPReview";
+import { useEffect } from "react";
 
 function ProductDetailsPage() {
     const {productId} = useParams();
     const {productsList, isProductsListLoading} = useProductList([]);
-    
+
+    useEffect(() => {
+        document.querySelector(".mobile-search-box")?.classList.add("hide");
+    }, [])
+
     if(isProductsListLoading) return <Spinner />
 
     const productData = productsList.filter((item) => item.id === Number(productId));

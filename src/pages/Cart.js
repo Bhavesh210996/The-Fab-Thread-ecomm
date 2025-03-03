@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useUser } from "../components/Authentication/useUser";
 import "../components/Cart/cart.css"
 import CartItemList from "../components/Cart/CartItemList"
@@ -9,12 +10,16 @@ function Cart() {
     const {cartEntries, isEntriesLoading} = useCartEntries();
     const {user} = useUser();
 
+    useEffect(() => {
+        document.querySelector(".mobile-search-box").classList.add("hide");
+    }, [])
+
     if(isEntriesLoading) return <Spinner />
 
     const currentUserEntries = cartEntries.filter((entry) => entry.userId === user.id);
 
     return (
-        <div className="cart-page mobile-mainContent">
+        <div className="cart-page">
             <div className="cart-container">
                 {currentUserEntries.length > 0 ? 
                     (

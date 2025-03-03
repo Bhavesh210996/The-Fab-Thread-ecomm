@@ -333,3 +333,37 @@ li.availability-row {
 .item-url .user-review-star-wrapper .pdp-review-star{
     margin-left: 3px;
 }
+
+/* media query */
+@media (max-width: 1023px){
+    .productTitle-container{
+        flex-direction: column;
+        gap: 10px;
+    }
+    .productImg-box{
+        width: 100%;
+        height: 350px;
+    }
+    /* .productImg-box img{
+        object-fit: cover;
+    } */
+    .pdp-price-info{
+        width: 100%;
+    }
+    .details-rating-container{
+        flex-direction: column;
+    }
+    .product-details-box,
+    .product-rating-box{
+        width: 100%;
+    }
+    .pdp-brand{
+        font-size: 18px;
+    }
+    .pdp-name{
+        font-size: 18px;
+    }
+    .itemSize .size-heading{
+        font-size: 18px;
+    }
+}

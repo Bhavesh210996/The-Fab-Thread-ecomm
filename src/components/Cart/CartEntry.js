@@ -9,6 +9,7 @@ import ConfirmDelete from "../ui/ConfirmDelete";
 import { useAddToCart } from "./useAddToCart";
 import SpinnerMini from "../ui/SpinnerMini";
 import PriceBox from "../ui/PriceBox";
+import { HiMiniXMark } from "react-icons/hi2";
 
 function CartEntry({item}) {
     const [itemQuantity, setItemQuantity] = useState(1)
@@ -77,7 +78,7 @@ function CartEntry({item}) {
             <Modal>
                 <div className="remove-item">
                     <Modal.Open opens="delete">
-                        <button type="button" className="cross-btn"> X </button>
+                        <button type="button" className="cross-btn"> <HiMiniXMark /> </button>
                     </Modal.Open>
 
                     <Modal.Window name="delete">

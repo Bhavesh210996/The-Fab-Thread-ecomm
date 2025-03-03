@@ -23,11 +23,11 @@ img.empty-cart-img {
 }
 .cart-entry{
     display: flex;
-    justify-content: space-between;
     gap: 10px;
     margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #eaeaec;
+    position: relative;
 }
 .item-img-box{
     width: 20%;
@@ -127,6 +127,19 @@ input:focus-visible {
 .item-return-text{
     color: var(--color-grey-600);
     font-size: 12px;
+}
+.remove-item{
+    position: absolute;
+    right: 15px;
+    top: 7px;
+    cursor: pointer;
+}
+.remove-item .cross-btn{
+    all: unset;
+}
+.remove-item .cross-btn svg{
+    width: 20px;
+    height: 20px;
 }
 
 /* cart price box */
@@ -491,4 +504,17 @@ input:focus-visible {
     font-size: 12px;
     color: #dc2626;
     font-family: InterVariable, system-ui, sans-serif;;
+}
+
+/* media query */
+@media (max-width: 1023px){
+    .cart-container{
+        flex-direction: column;
+    }
+    .cartItem-box{
+        all: unset;
+    }
+    .priceBlock-box{
+        all: unset;
+    }
 }

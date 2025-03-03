@@ -23,9 +23,11 @@ function AppLayout() {
             {isMobile && <SidebarNav />}
             <Header />
             <main>
-                {isMobile && <div className="mobile-search-box">
-                    <SearchBox />
-                </div>}
+                {isMobile && 
+                    <div className="mobile-search-box">
+                        <SearchBox />
+                    </div>
+                }
                 <Outlet />
             </main>
         </div>
