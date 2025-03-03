@@ -3,7 +3,7 @@ import "../components/Account/account.css"
 
 function Profile() {
     return (
-        <div className="profile-page">
+        <div className="profile-page mobile-mainContent">
             <div className="profile-container">
                 <UserInfo />
             </div>

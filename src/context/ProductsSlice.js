@@ -20,10 +20,10 @@ const productsSlice = createSlice({
     }
 })
 
-export const productsLoading = (filter) =>{
+export const productsLoading = () =>{
     return async function(dispatch){
         dispatch({type: "products/loader"})
-        const data = await getProductsList(filter)
+        const data = await getProductsList()
         dispatch({type: "products/productsLoading", payload: data})
     }
 }

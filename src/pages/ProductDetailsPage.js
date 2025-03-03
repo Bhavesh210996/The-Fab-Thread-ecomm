@@ -19,7 +19,7 @@ function ProductDetailsPage() {
 
 
     return (
-        <div className="productDetails-page">
+        <div className="productDetails-page mobile-mainContent">
             <div className="productTitle-container">
                 <div className="productImg-box">
                     <img src={itemImage ? itemImage : "/imgNotFound.webp"} alt="" />

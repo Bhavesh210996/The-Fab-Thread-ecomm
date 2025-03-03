@@ -3,7 +3,7 @@ import "../style/authentication.css"
 function Login() {
 
     return (
-        <div className="login-page">
+        <div className="login-page mobile-mainContent">
             <div className="login-container">
                 <div className="login-banner">
                     <img src="login-banner.webp" alt="banner" />

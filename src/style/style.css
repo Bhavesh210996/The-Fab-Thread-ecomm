@@ -427,3 +427,8 @@ input:disabled {
     width: 17rem;
   }
 }
+@media (max-width: 1023px){
+  .mobile-mainContent{
+      margin-top: 133px;
+  }
+}

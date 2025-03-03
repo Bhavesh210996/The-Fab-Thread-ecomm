@@ -5,7 +5,7 @@ import "../components/Cart/cart.css"
 
 function Address() {
     return (
-        <div className="address-page">
+        <div className="address-page mobile-mainContent">
             <div className="address-container">
                 <AddressList />
                 <CartPriceBox type="payment"/>

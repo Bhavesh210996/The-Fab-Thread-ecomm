@@ -4,7 +4,7 @@ import Banner from "../components/ui/Banner"
 
 function MenFashion() {
     return (
-        <div className="menFashion-page">
+        <div className="menFashion-page mobile-mainContent">
             <Banner type="male" />
             <div className="category-text">Shop By Category</div>
             <Category genderType="men"/>

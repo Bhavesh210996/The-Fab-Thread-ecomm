@@ -1,30 +1,18 @@
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
 import Spinner from "../ui/Spinner";
 import ProductCard from "./ProductCard"
-import { useProductList } from "./useProductList"
 import { useSearchQuery } from "../../context/SearchProductContextApi";
-import { useEffect, useState } from "react";
 
 function ProductBox() {
     const [imagesLoaded, setImagesLoaded] = useState();
-    const [searchParams] = useSearchParams();
     const {searchQuery} = useSearchQuery();
     const {categoryName} = useParams();
-        
-    //Filter
-    const brandParam = searchParams.get("brand")?.split("%");
-    const colorParam = searchParams.get("color")?.split("%");
-    const filters = [];
 
-    if(brandParam){
-        filters.push({field: "brand", value: brandParam})
-    }
-    if(colorParam){
-        filters.push({field: "color", value: colorParam})
-    }
+    const {productsList, isProductsListLoading} = useSelector((store) => store.products);
 
-    const {productsList, isProductsListLoading} = useProductList(filters);
-    
     let productData;
     //category results
     const categoryFilter = productsList?.filter(item => item.categoryName === categoryName.toLowerCase());

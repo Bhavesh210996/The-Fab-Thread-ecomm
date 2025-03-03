@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
     cartCount: 0,
     selectedAddress: null,
-    isSidebarOpen: false
+    isSidebarOpen: false,
+    isFilterBarOpen: false
 }
 
 const cartSlice = createSlice({
@@ -18,9 +19,12 @@ const cartSlice = createSlice({
         },
         toggleSidebar(state, action){
             state.isSidebarOpen = action.payload
+        },
+        toggleFilterSideBar(state, action){
+            state.isFilterBarOpen = action.payload
         }
     }
 })
 
-export const {setCartCount, setSelectAddress, toggleSidebar} = cartSlice.actions;
+export const {setCartCount, setSelectAddress, toggleSidebar, toggleFilterSideBar} = cartSlice.actions;
 export default cartSlice.reducer;

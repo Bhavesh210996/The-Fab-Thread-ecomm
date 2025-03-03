@@ -14,7 +14,7 @@ function Cart() {
     const currentUserEntries = cartEntries.filter((entry) => entry.userId === user.id);
 
     return (
-        <div className="cart-page">
+        <div className="cart-page mobile-mainContent">
             <div className="cart-container">
                 {currentUserEntries.length > 0 ? 
                     (

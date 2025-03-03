@@ -12,7 +12,7 @@ function YourOrders() {
     if(isLoading) return <Spinner />
 
     return (
-        <div className="orders-page">
+        <div className="orders-page mobile-mainContent">
             <div className="orders-container">
                 <div className="orders-headline">
                     <h2>Orders & Returns</h2>

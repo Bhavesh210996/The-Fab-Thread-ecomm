@@ -40,7 +40,7 @@ function FilterBox() {
 
     //search results
     const searchQueryData = searchQuery ? productsList?.filter((item) => {
-        const queryTerms = searchQuery.toLowerCase().split(" ").map(term => term.trim());
+    const queryTerms = searchQuery.toLowerCase().split(" ").map(term => term.trim());
     
       return queryTerms.every((term) => {
         return (

@@ -3,7 +3,7 @@ import OfferBanner from "../components/ui/OfferBanner"
 
 function Homepage() {
     return (
-        <div className="homepage">
+        <div className="homepage mobile-mainContent">
             <OfferBanner />
             <div className="category-text">Shop By Category</div>
             <Category />
