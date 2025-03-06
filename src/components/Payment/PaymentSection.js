@@ -24,7 +24,8 @@ function PaymentSection({totalCartPrice}) {
     const navigate  = useNavigate();
     const queryClient = useQueryClient();
 
-    const {user} = useUser();
+    // const {user} = useUser();
+    const {user} = useSelector((store) => store.cartStates);
     // const {selectedAddress, setSelectAddress} = useSelectedAddress();
     const {selectedAddress} = useSelector((store) => store.cartStates)
     const dispatch = useDispatch();

@@ -9,6 +9,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import SignUpForm from "../Account/SignUpForm";
 import { useQueryClient } from "@tanstack/react-query";
 import SpinnerMini from "./SpinnerMini";
+import { useDispatch } from "react-redux";
+import { getUser } from "../../context/CartSlice";
 
 function LoginForm({isPopupSession, onCloseModal}) {
     const [email, setEmail] = useState("");
@@ -17,6 +19,7 @@ function LoginForm({isPopupSession, onCloseModal}) {
     const {loginFn, isLoggingIn} = useLogin();
     const queryClient = useQueryClient();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleSignupForm =()=>{
       setSignUpOpen(!signUpOpen)
@@ -34,6 +37,7 @@ function LoginForm({isPopupSession, onCloseModal}) {
       loginFn({email, password}, {
         onSuccess: (user) => {
           queryClient.setQueryData(["user"], user.user)
+          dispatch(getUser())
           console.log("user login successfully")
           if(!isPopupSession) navigate("/")
         },

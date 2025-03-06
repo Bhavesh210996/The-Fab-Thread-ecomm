@@ -1,15 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useUser } from "../components/Authentication/useUser";
-import { useCartEntries } from "../components/Cart/useCartEntries";
 import { useEffect } from "react";
+
+import { useCartEntries } from "../components/Cart/useCartEntries";
 import { setCartCount } from "../context/CartSlice";
 
 function useCartCount() {
     const {cartCount} = useSelector((store) => store.cartStates)
     const {cartEntries, isEntriesLoading} = useCartEntries();
-    const {user} = useUser();
+    const {user} = useSelector((store) => store.cartStates);
     const dispatch = useDispatch();
-
     
     useEffect(() => {
         if(!cartEntries) return;

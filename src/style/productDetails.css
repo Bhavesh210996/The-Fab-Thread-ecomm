@@ -107,8 +107,12 @@
 .addtoCart-btn-box{
     margin-top: 10px;
 }
-.addtoCart-btn-box svg{
+.addtoCart-btn-box button span{
+    margin-left: 10px;
     margin-right: 10px;
+}
+.addtoCart-btn-box button svg{
+    color: #fff;
 }
 /* .addToCart-btn{
     font-size: 1.6rem;

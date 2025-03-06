@@ -7,13 +7,12 @@ import Button from "../ui/Button";
 import OrderPriceBox from "./OrderPriceBox";
 import { PLATFORM_FEE, SHIPPING_FEE } from "../../Utils/Constants";
 import { useSelector } from "react-redux";
+import { memo } from "react";
 
-function CartPriceBox({type, setTotalCartPrice}) {
+const CartPriceBox = memo(function CartPriceBox({type, setTotalCartPrice}) {
     const navigate = useNavigate();
-    // const {selectedAddress} = useSelectedAddress();
-    const {selectedAddress} = useSelector((store) => store.cartStates)
+    const {selectedAddress, user} = useSelector((store) => store.cartStates)
     const {cartEntries, isEntriesLoading} = useCartEntries();
-    const {user} = useUser();
     
     const currentUserEntries = cartEntries?.filter((entry) => entry.userId === user?.id);
 
@@ -36,16 +35,16 @@ function CartPriceBox({type, setTotalCartPrice}) {
                         <span className="price-text">Total Amount</span>
                         <span className="price-amount">{formatCurrency(totalCartAmount)}</span>
                     </div>
-                    {type !== "order" && 
+                    {type !== "order" &&
                     <Button
                         onClick={() => navigate(`/${type}`)} type="cart"
-                        disabled={type !== "address" ? selectedAddress ? false : true : false}>
+                        disabled={type !== "address" && !selectedAddress}>
                         {type === "address" ? "Place order" : "Continue"}
                     </Button>}
                 </div>
             </div>
         </div>
     )
-}
+})
 
 export default CartPriceBox

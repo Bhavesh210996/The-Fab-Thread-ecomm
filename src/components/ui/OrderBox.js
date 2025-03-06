@@ -4,10 +4,12 @@ import { useOrderRating } from "../Orders/useOrderRating";
 import { useSetItemRating } from "../Product/useSetItemRating";
 import Rating from "./Rating";
 import { useQueryClient } from "@tanstack/react-query";
+import { useSelector } from "react-redux";
 
 function OrderBox({order}) {
     const {id: orderId, productDetails, userRating, productId} = order;
-    const {user} = useUser();
+    // const {user} = useUser();
+    const {user} = useSelector((store) => store.cartStates);
     const queryClient = useQueryClient();
 
     const {brand, itemName, size, quantity, price, itemImage} = productDetails;

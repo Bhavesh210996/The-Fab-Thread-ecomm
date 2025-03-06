@@ -1,9 +1,11 @@
+import { useSelector } from "react-redux";
 import { useAddreses } from "../Address/useAddreses"
 import { useUser } from "../Authentication/useUser";
 import Spinner from "../ui/Spinner";
 
 function SelectPincode({setSelectedPin, selectedPin, onCloseModal}) {
-    const {user} = useUser();
+    // const {user} = useUser();
+    const {user} = useSelector((store) => store.cartStates);
     const currentUseradd = {field:"userId" , value: user?.id}
     const {addreses, isAddressLoading} = useAddreses(currentUseradd);
 

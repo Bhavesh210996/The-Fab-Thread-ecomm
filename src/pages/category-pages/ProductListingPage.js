@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useResponsiveQuery } from "../../context/MediaQueryContextApi";
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
-import { useMediaQuery } from "react-responsive";
 
 import "../../components/Product/products.css";
 import FilterBox from "../../components/ui/FilterBox";
@@ -12,7 +12,7 @@ import { toggleFilterSideBar } from "../../context/CartSlice";
 
 function ProductListingPage() {
     const dispatch = useDispatch();
-    const isMobile = useMediaQuery({maxWidth: 1023});
+    const {isMobile} = useResponsiveQuery();
 
     //Filter
     useEffect(() => {

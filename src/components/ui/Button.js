@@ -1,7 +1,7 @@
-import { useMediaQuery } from "react-responsive";
+import { useResponsiveQuery } from "../../context/MediaQueryContextApi";
 
 function Button({children, disabled, onClick, type}) {
-  const isMobile = useMediaQuery({maxWidth: 1023})
+  const {isMobile} = useResponsiveQuery();
   let style;
 
   if(type === "cart"){

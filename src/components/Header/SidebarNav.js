@@ -11,7 +11,8 @@ function SidebarNav() {
     const dispatch = useDispatch();
     const {isSidebarOpen} = useSelector((store) => store.cartStates)
     const {logout, userLoggingOut} = useLogout();
-    const {user, isAuthenticated} = useUser();
+    // const {user, isAuthenticated} = useUser();
+    const {user, isAuthenticated} = useSelector((store) => store.cartStates);
     const {fullName} = user?.user_metadata || {};
 
     return (

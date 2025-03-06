@@ -6,12 +6,14 @@ import CartPriceBox from "../components/Cart/CartPriceBox"
 import EmptyCart from "../components/Cart/EmptyCart";
 import { useCartEntries } from "../components/Cart/useCartEntries";
 import Spinner from "../components/ui/Spinner";
+import { useSelector } from "react-redux";
+
 function Cart() {
     const {cartEntries, isEntriesLoading} = useCartEntries();
-    const {user} = useUser();
+    const {user} = useSelector((store) => store.cartStates);
 
     useEffect(() => {
-        document.querySelector(".mobile-search-box").classList.add("hide");
+        document.querySelector(".mobile-search-box")?.classList.add("hide");
     }, [])
 
     if(isEntriesLoading) return <Spinner />

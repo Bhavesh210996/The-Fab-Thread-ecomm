@@ -20,11 +20,7 @@ function PDPRating({productData}) {
         4: fourStar,
         5: fiveStar,
     }
-
-    // ratingLevelArray.push(fiveStar, fourStar, threeStar, twoStar, oneStar);
-
-    console.log(ratingLevelArray)
-
+    
     return (
         <div className="pdp-rating-section">
             <div className="ave-rating-container">

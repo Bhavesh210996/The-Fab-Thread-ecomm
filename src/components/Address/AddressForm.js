@@ -10,6 +10,7 @@ import useBlur from "../../Hooks/useBlur";
 import Input from "../ui/Input";
 import FormRow from "../ui/FormRow";
 import FormError from "../ui/FormError";
+import { useSelector } from "react-redux";
 
 function AddressForm({editFormData = {}, setFormData, editId, onCloseModal}) {
     const pincodeRef = useRef(null);
@@ -17,7 +18,8 @@ function AddressForm({editFormData = {}, setFormData, editId, onCloseModal}) {
 
     const {pincodeDataFn, isPinCodeLoading, data: pincodeData} = usePinCodeData();
     const {addNewAddressFn, isPending: isAddressAdding} = useNewAddress();
-    const {user} = useUser();
+    // const {user} = useUser();
+    const {user} = useSelector((store) => store.cartStates);
     const {editAddress, isAddressEditing} = useEditAddress();
 
     const editSession = Boolean(editId);

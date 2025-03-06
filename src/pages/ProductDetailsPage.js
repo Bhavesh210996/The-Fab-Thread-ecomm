@@ -1,4 +1,6 @@
 import { useParams } from "react-router-dom"
+import { useEffect } from "react";
+
 import { useProductList } from "../components/Product/useProductList";
 import Spinner from "../components/ui/Spinner";
 import "../style/productDetails.css"
@@ -6,7 +8,6 @@ import PDPAddToCart from "../components/Product/PDPAddToCart";
 import PDPDetails from "../components/Product/PDPDetails";
 import PDPRating from "../components/Product/PDPRating";
 import PDPReview from "../components/Product/PDPReview";
-import { useEffect } from "react";
 
 function ProductDetailsPage() {
     const {productId} = useParams();

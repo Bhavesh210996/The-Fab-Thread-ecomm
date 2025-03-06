@@ -2,9 +2,11 @@ import { NavLink } from "react-router-dom"
 import { useUser } from "../Authentication/useUser"
 import { HiMiniFolderOpen, HiOutlineArrowRightOnRectangle, HiUser } from "react-icons/hi2";
 import SpinnerMini from "./SpinnerMini";
+import React from "react";
+import { useSelector } from "react-redux";
   
-function UserProfile({onLogout, userLoggingOut}) {
-    const {user} = useUser();
+const UserProfile = React.memo(function UserProfile({onLogout, userLoggingOut}) {
+    const {user} = useSelector((store) => store.cartStates);
     const {fullName, avatar} = user?.user_metadata;
 
     return (
@@ -29,6 +31,6 @@ function UserProfile({onLogout, userLoggingOut}) {
           )}
         </div>
     )
-}
+})
 
 export default UserProfile

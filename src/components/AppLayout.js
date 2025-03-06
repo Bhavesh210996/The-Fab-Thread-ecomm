@@ -1,14 +1,14 @@
 import { Outlet } from "react-router-dom"
-import Header from "./Header/Header"
 import SidebarNav from "./Header/SidebarNav"
 import { useSelector } from "react-redux"
 import { useEffect } from "react";
 import SearchBox from "./Header/SearchBox";
-import { useMediaQuery } from "react-responsive";
+import { useResponsiveQuery } from "../context/MediaQueryContextApi";
 
 function AppLayout() {
     const {isSidebarOpen} = useSelector((store) => store.cartStates);
-    const isMobile = useMediaQuery({maxWidth: 1023});
+    const {isMobile} = useResponsiveQuery();
+    console.log("app layout")
 
     useEffect(() => {
         if(isSidebarOpen){
@@ -21,7 +21,7 @@ function AppLayout() {
     return (
         <div className="container">
             {isMobile && <SidebarNav />}
-            <Header />
+            {/* <Header /> */}
             <main>
                 {isMobile && 
                     <div className="mobile-search-box">

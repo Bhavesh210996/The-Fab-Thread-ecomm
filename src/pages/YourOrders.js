@@ -3,10 +3,12 @@ import { useOrders } from "../components/Orders/useOrders"
 import Spinner from "../components/ui/Spinner";
 import OrderBox from "../components/ui/OrderBox";
 import "../style/orders.css"
+import { useSelector } from "react-redux";
 
 function YourOrders() {
     const {orders, isLoading} = useOrders();
-    const {user} = useUser();
+    // const {user} = useUser();
+    const {user} = useSelector((store) => store.cartStates);
     const currentUserOrders = orders?.filter((order) => order.userId === user?.id);
 
     if(isLoading) return <Spinner />

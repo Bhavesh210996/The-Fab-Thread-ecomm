@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
@@ -11,7 +11,7 @@ import SpinnerMini from "../ui/SpinnerMini";
 import PriceBox from "../ui/PriceBox";
 import { HiMiniXMark } from "react-icons/hi2";
 
-function CartEntry({item}) {
+const CartEntry = memo(function CartEntry({item}) {
     const [itemQuantity, setItemQuantity] = useState(1)
     const queryClient = useQueryClient();
 
@@ -88,6 +88,6 @@ function CartEntry({item}) {
             </Modal>
         </div>
     )
-}
+})
 
 export default CartEntry

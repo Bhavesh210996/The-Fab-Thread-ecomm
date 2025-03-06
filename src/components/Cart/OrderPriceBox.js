@@ -1,7 +1,8 @@
+import { memo } from "react"
 import { PLATFORM_FEE, SHIPPING_FEE } from "../../Utils/Constants"
 import { formatCurrency } from "../../Utils/helpers"
 
-function OrderPriceBox({priceWithoutDiscount, totalDiscount}) {
+const OrderPriceBox = memo(function OrderPriceBox({priceWithoutDiscount, totalDiscount}) {
     return (
         <div className="border-bottom">
             <div className="pricebox-heading">Price Details</div>
@@ -23,6 +24,6 @@ function OrderPriceBox({priceWithoutDiscount, totalDiscount}) {
             </div>
         </div>
     )
-}
+})
 
 export default OrderPriceBox

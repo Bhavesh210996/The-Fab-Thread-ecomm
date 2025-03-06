@@ -2,6 +2,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import './App.css';
 import './style/style.css'
@@ -26,6 +28,9 @@ import ScrollToTop from './components/ui/ScrollToTop';
 import { SearchProductContextProvider } from './context/SearchProductContextApi';
 import { SelectAddressContextProvider } from './context/SelectAddressContextApi';
 import { CartEntryCountProvider } from './context/CartEntryCountContextApi';
+import Header from './components/Header/Header';
+import { getUser } from './context/CartSlice';
+import { MediaQueryContextProvider } from './context/MediaQueryContextApi';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,14 +41,22 @@ const queryClient = new QueryClient({
 })
 
 function App() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+      dispatch(getUser());
+  }, [dispatch])
+  
   return (
     <QueryClientProvider client={queryClient}>
       <SearchProductContextProvider>
       {/* <CartEntryCountProvider> */}
       {/* <SelectAddressContextProvider> */}
+      <MediaQueryContextProvider>
       <ReactQueryDevtools initialIsOpen={false} />
       <BrowserRouter>
       <ScrollToTop />
+      <Header />
         <Routes>
 
           <Route element={<AppLayout />}>
@@ -81,6 +94,7 @@ function App() {
           color: "var(--color-grey-700)"
         }
       }} />
+      </MediaQueryContextProvider>
     {/* </SelectAddressContextProvider> */}
     {/* </CartEntryCountProvider> */}
     </SearchProductContextProvider>

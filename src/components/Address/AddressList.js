@@ -4,9 +4,11 @@ import { useAddreses } from "./useAddreses";
 import { useUser } from "../Authentication/useUser";
 import Spinner from "../ui/Spinner";
 import AddressBox from "./AddressBox";
+import { useSelector } from "react-redux";
 
 function AddressList() {
-    const {user} = useUser();
+    // const {user} = useUser();
+    const {user} = useSelector((store) => store.cartStates);
 
     const currentUseradd = {field:"userId" , value: user?.id}
     const {addreses, isAddressLoading} = useAddreses(currentUseradd);

@@ -1,8 +1,9 @@
-import { useMediaQuery } from "react-responsive";
+import { memo } from "react";
 import { formatCurrency } from "../../Utils/helpers"
+import { useResponsiveQuery } from "../../context/MediaQueryContextApi";
 
-const PriceBox = ({price, discountPrice, discount, type}) => {
-    const isMobile = useMediaQuery({maxWidth: 1023})
+const PriceBox = memo(({price, discountPrice, discount, type}) => {
+    const {isMobile} = useResponsiveQuery();
     let priceStyle;
     let discountStyle;
 
@@ -28,6 +29,6 @@ const PriceBox = ({price, discountPrice, discount, type}) => {
             <span style={discountStyle} className="item-discount">({discount})</span>
         </div>
     )
-}
+})
 
 export default PriceBox;

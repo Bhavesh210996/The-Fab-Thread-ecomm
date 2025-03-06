@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react"
-import { useAddToCart } from "../Cart/useAddToCart";
+import { HiShoppingBag } from "react-icons/hi2";
+import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import { useCartEntries } from "../Cart/useCartEntries";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../Authentication/useUser";
+
+import { useAddToCart } from "../Cart/useAddToCart";
+import { useCartEntries } from "../Cart/useCartEntries";
 import Button from "../ui/Button";
 import Modal from "../ui/Modal";
 import SelectPincode from "./SelectPincode";
 import { useAddreses } from "../Address/useAddreses";
 import PriceBox from "../ui/PriceBox";
-import { HiShoppingBag } from "react-icons/hi2";
 import LoginForm from "../ui/LoginForm";
+import SpinnerMini from "../ui/SpinnerMini";
 
 function PDPAddToCart({productData}) {
     const [selectedSize, setSelectedSize] = useState();
@@ -20,11 +22,10 @@ function PDPAddToCart({productData}) {
     const [selectedAddress, setSelectedAddress] = useState();
 
     const navigate = useNavigate();
-    const {isAuthenticated} = useUser();
+    const {user, isAuthenticated} = useSelector((store) => store.cartStates);
 
-    const {id, itemName, brand, price, discountPrice, discount, quantity, size } = productData
+    const {id, itemName, brand, price, discountPrice, discount, size } = productData
     const {cartEntries, isEntriesLoading} = useCartEntries();
-    const {user} = useUser();
     const currentUseradd = {field:"userId" , value: user?.id}
     const {addreses, isAddressLoading} = useAddreses(currentUseradd);
     const {addToCartFn, isAddingCart} = useAddToCart();
@@ -49,7 +50,6 @@ function PDPAddToCart({productData}) {
         if(!selectedSize) return document.querySelector(".size-error").classList.remove("hide");
         if(!isAuthenticated) return navigate("/login");
 
-        setIsAddedToCart(!isAddedToCart);
         let cartEntry;
         if(productInCart.length > 0){
             cartEntry = {
@@ -64,8 +64,10 @@ function PDPAddToCart({productData}) {
             }
         }
         addToCartFn({entry: cartEntry, id: productInCart[0]?.id},
-                    {onSuccess: () =>
-                        toast.success("Product added to cart")
+                    {onSuccess: () => {
+                            toast.success("Product added to cart")
+                            setIsAddedToCart(!isAddedToCart)
+                        }
                     })
     }
     // if(isAddressLoading) return <Spinner />
@@ -119,6 +121,7 @@ function PDPAddToCart({productData}) {
                     <Button onClick={handleAddToCart} disabled={isAddingCart}>
                         <HiShoppingBag />
                         <span>Add To Cart</span>
+                        {isAddingCart && <SpinnerMini />}
                     </Button>
                     )
                     :

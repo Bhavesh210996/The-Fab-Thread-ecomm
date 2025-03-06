@@ -1,8 +1,10 @@
+import { useSelector } from "react-redux";
 import { useUser } from "../Authentication/useUser"
 import Button from "../ui/Button"
 
 function UserInfo() {
-    const {user} = useUser();
+    // const {user} = useUser();
+    const {user} = useSelector((store) => store.cartStates);
     const {email, user_metadata: {fullName, phone}} = user;
 
     return (
