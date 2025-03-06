@@ -28,7 +28,6 @@ import ScrollToTop from './components/ui/ScrollToTop';
 import { SearchProductContextProvider } from './context/SearchProductContextApi';
 import { SelectAddressContextProvider } from './context/SelectAddressContextApi';
 import { CartEntryCountProvider } from './context/CartEntryCountContextApi';
-import Header from './components/Header/Header';
 import { getUser } from './context/CartSlice';
 import { MediaQueryContextProvider } from './context/MediaQueryContextApi';
 
@@ -56,7 +55,6 @@ function App() {
       <ReactQueryDevtools initialIsOpen={false} />
       <BrowserRouter>
       <ScrollToTop />
-      <Header />
         <Routes>
 
           <Route element={<AppLayout />}>

@@ -2,8 +2,10 @@ import { Outlet } from "react-router-dom"
 import SidebarNav from "./Header/SidebarNav"
 import { useSelector } from "react-redux"
 import { useEffect } from "react";
+
 import SearchBox from "./Header/SearchBox";
 import { useResponsiveQuery } from "../context/MediaQueryContextApi";
+import Header from "./Header/Header";
 
 function AppLayout() {
     const {isSidebarOpen} = useSelector((store) => store.cartStates);
@@ -21,7 +23,7 @@ function AppLayout() {
     return (
         <div className="container">
             {isMobile && <SidebarNav />}
-            {/* <Header /> */}
+            <Header />
             <main>
                 {isMobile && 
                     <div className="mobile-search-box">
