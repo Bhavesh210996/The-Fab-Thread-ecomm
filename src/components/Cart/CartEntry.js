@@ -2,6 +2,7 @@ import { memo, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import { HiMiniXMark } from "react-icons/hi2";
 
 import { useDeletingEntry } from "./useDeletingEntry";
 import Modal from "../ui/Modal";
@@ -9,16 +10,17 @@ import ConfirmDelete from "../ui/ConfirmDelete";
 import { useAddToCart } from "./useAddToCart";
 import SpinnerMini from "../ui/SpinnerMini";
 import PriceBox from "../ui/PriceBox";
-import { HiMiniXMark } from "react-icons/hi2";
 
 const CartEntry = memo(function CartEntry({item}) {
     const [itemQuantity, setItemQuantity] = useState(1)
     const queryClient = useQueryClient();
 
     const {id:itemId, productSize, quantity, products} = item;
-    const {id, itemName, brand, price, discount, discountPrice, itemImage, itemType} = products;
+    const {id, size, itemName, brand, price, discount, discountPrice, itemImage, itemType} = products;
     const {addToCartFn, isAddingCart} = useAddToCart();
     const {deleteEntry, isDeleting} = useDeletingEntry();
+
+    const availableQty = Object.entries(size).find(([key, qty]) => key === productSize)?.[1];
 
     const productUrl = `/${itemType}/${brand}/${itemName.replace(/ /g, '-')}/${id}`;
 
@@ -63,7 +65,7 @@ const CartEntry = memo(function CartEntry({item}) {
                             -
                         </button>
                         {!isAddingCart ? <input type="text" className="qty-input-field" value={itemQuantity} disabled/> : <SpinnerMini />}
-                        <button type="button" className="qty-plus-btn qty-update-btn" onClick={increaseQty}>
+                        <button type="button" className="qty-plus-btn qty-update-btn" onClick={increaseQty} disabled={itemQuantity === availableQty}>
                             +
                         </button>
                     </div>

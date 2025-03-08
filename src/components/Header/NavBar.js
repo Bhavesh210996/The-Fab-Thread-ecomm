@@ -1,5 +1,4 @@
 
-// import { useCartCount } from "../../context/CartEntryCountContextApi";
 import MobileNav from "./MobileNav";
 import DesktopNav from "./DesktopNav";
 import { useResponsiveQuery } from "../../context/MediaQueryContextApi";

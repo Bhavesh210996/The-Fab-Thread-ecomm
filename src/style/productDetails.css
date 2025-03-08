@@ -54,6 +54,7 @@
     border-radius: 6px;
     text-align: center;
     cursor: pointer;
+    position: relative;
 }
 .sizeButton p{
     text-transform: uppercase;
@@ -66,7 +67,28 @@
 .sizeButton:hover{
     border: 1px solid #fb7185;
 }
-
+.sizeButton:disabled:hover{
+    border:2px solid #eaeaec;
+}
+span.qtyLabel {
+    width: 36px;
+    height: 14px;
+    background: #dc2626;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 4px;
+    color: #ffffff;
+}
+.size-btn-strike{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #d5d6d9;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
 .pdp-itemName-info{
     border-bottom: 1px solid #eaeaec;
     margin-bottom: 14px;

@@ -5,17 +5,14 @@ import { HiHeart, HiShoppingBag, HiUser } from "react-icons/hi2"
 
 import SearchBox from "./SearchBox"
 import UserProfile from "../ui/UserProfile"
-import { useUser } from "../Authentication/useUser";
 import useCartCount from "../../Hooks/useCartCount";
 import { useLogout } from "../Authentication/useLogout";
 import Logo from "./Logo";
 
 function DesktopNav() {
   const [isDrpDwnOpen, setIsDrpDwnOpen] = useState(false);
-  console.log("DesktopNav Rendered");
   const navigate = useNavigate();
   const {cartCount} = useCartCount();
-  // const {user} = useUser();
   const {user} = useSelector((store) => store.cartStates);
   const {logout, userLoggingOut} = useLogout();
 

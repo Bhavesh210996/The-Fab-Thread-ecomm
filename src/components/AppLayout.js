@@ -10,8 +10,7 @@ import Header from "./Header/Header";
 function AppLayout() {
     const {isSidebarOpen} = useSelector((store) => store.cartStates);
     const {isMobile} = useResponsiveQuery();
-    console.log("app layout")
-
+    
     useEffect(() => {
         if(isSidebarOpen){
             document.body.classList.add("no-scroll");

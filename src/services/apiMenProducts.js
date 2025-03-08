@@ -7,7 +7,7 @@ export async function getProductsList(filterValue = []){
     
     //Filter
     filterValue.forEach((filter) => {
-        query = query.in(filter.field, filter.value)
+        query = query.in(filter.field, filter.value);
     })
 
     const {data, error} = await query;
@@ -58,5 +58,36 @@ export async function setItemRating(newRating, id){
 
     if(error){
         throw new Error(error.message)
+    }
+}
+
+export async function updateProductQuantity(itemsQtyArray){
+    let query = supabase
+                .from("products")
+                .select("id, size")                 
+                        
+    query = query.in("id", itemsQtyArray.map(item => item.id));
+
+    const {data: productsdata, error} = await query;
+
+    if(error){
+        throw new Error(error.message)
+    }
+
+    if(productsdata.length > 0){
+        itemsQtyArray.forEach((item) => {
+            const product = productsdata.find((product) => product.id === item.id);
+            if(product && product.size[item.selectedSize] !== undefined){
+                product.size[item.selectedSize] -= item.selectedQty;
+            }
+        })
+    }
+
+    const {error: updateError} = await supabase
+        .from("products")
+        .upsert(productsdata, {onConflict: ['id']});
+    
+    if(updateError){
+        throw new Error(updateError.message)
     }
 }

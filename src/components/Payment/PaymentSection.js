@@ -1,20 +1,20 @@
 import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { HiBanknotes, HiCreditCard } from "react-icons/hi2";
+
 import Button from "../ui/Button"
 import CashOnDelivery from "../ui/CashOnDelivery"
 import CreditDebitCard from "../ui/Credit-Debit-Card"
 import UPI from "../ui/UPI"
-import { useQueryClient } from "@tanstack/react-query";
-import { useUser } from "../Authentication/useUser";
-import { useSelectedAddress } from "../../context/SelectAddressContextApi";
 import { useAddreses } from "../Address/useAddreses";
 import { useCartEntries } from "../Cart/useCartEntries";
 import { useCreateOrders } from "../Cart/useCreateOrders";
 import { useDeletingEntry } from "../Cart/useDeletingEntry";
 import { useOrders } from "../Orders/useOrders";
-import { useNavigate } from "react-router-dom";
-import { HiBanknotes, HiCreditCard } from "react-icons/hi2";
-import { useDispatch, useSelector } from "react-redux";
 import { setSelectAddress } from "../../context/CartSlice";
+import { useItemQtyUpdate } from "./useItemQtyUpdate";
 
 function PaymentSection({totalCartPrice}) {
     const [selectedOption, setSelectedOption] = useState("cod");
@@ -24,9 +24,7 @@ function PaymentSection({totalCartPrice}) {
     const navigate  = useNavigate();
     const queryClient = useQueryClient();
 
-    // const {user} = useUser();
     const {user} = useSelector((store) => store.cartStates);
-    // const {selectedAddress, setSelectAddress} = useSelectedAddress();
     const {selectedAddress} = useSelector((store) => store.cartStates)
     const dispatch = useDispatch();
 
@@ -37,6 +35,7 @@ function PaymentSection({totalCartPrice}) {
     const {cartEntries, isEntriesLoading} = useCartEntries();
     const {createNewOrder, isPending} = useCreateOrders();
     const {deleteEntry} = useDeletingEntry();
+    const {qtyUpdateOnOrder, isQtyUpdating} = useItemQtyUpdate();
 
     const userEntries = cartEntries?.filter((entry) => entry.userId === user.id);
 
@@ -54,29 +53,36 @@ function PaymentSection({totalCartPrice}) {
                                     selectedOption === "upi" ? upiRadioSelected :
                                     selectedOption === "card" ? selectedOption : null;
         let orderdataArray = []
+        let itemsQtyArray = [];
         userEntries.forEach((entry) => {
-        const orderdata = {
-            userId: user?.id,
-            address: findSelectedAddress?.[0]?.address,
-            productDetails: {
-                itemName: entry.products.itemName,
-                brand: entry.products.brand,
-                color: entry.products.color,
-                gender: entry.products.gender,
-                itemType: entry.products.itemType,
-                quantity: entry.quantity,
-                size: entry.productSize,
-                price: entry.products.price,
-                discountPrice: entry.products.discountPrice,
-                itemImage: entry.products.itemImage
-            },
-            productId:entry.productId,
-            totalPrice: totalCartPrice,
-            paymentMethod: paymentOptSelected,
-            isPaid: selectedOption === "cod" ? false : true,
-            orderid: orderNumber
-        }
-        orderdataArray.push(orderdata)
+            const orderdata = {
+                userId: user?.id,
+                address: findSelectedAddress?.[0]?.address,
+                productDetails: {
+                    itemName: entry.products.itemName,
+                    brand: entry.products.brand,
+                    color: entry.products.color,
+                    gender: entry.products.gender,
+                    itemType: entry.products.itemType,
+                    quantity: entry.quantity,
+                    size: entry.productSize,
+                    price: entry.products.price,
+                    discountPrice: entry.products.discountPrice,
+                    itemImage: entry.products.itemImage
+                },
+                productId:entry.productId,
+                totalPrice: totalCartPrice,
+                paymentMethod: paymentOptSelected,
+                isPaid: selectedOption === "cod" ? false : true,
+                orderid: orderNumber
+            }
+            const qtyData = {
+                selectedSize: entry.productSize,
+                id:entry.productId,
+                selectedQty: entry.quantity
+            }
+            itemsQtyArray.push(qtyData);
+            orderdataArray.push(orderdata);
         })
         const entries = {field: "userId", value: user?.id}
         deleteEntry({id: "", entries}, {onSuccess: () => {
@@ -88,8 +94,11 @@ function PaymentSection({totalCartPrice}) {
             onSuccess: (data) => {
                 queryClient.setQueryData(["orders"], data)
                 navigate(`/orderConfirmation/${orderNumber}`);
-            }});
+            }
+        });
+        qtyUpdateOnOrder(itemsQtyArray)
         dispatch(setSelectAddress(""));
+
     }
 
     return (

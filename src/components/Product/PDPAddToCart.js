@@ -88,16 +88,18 @@ function PDPAddToCart({productData}) {
                 <div className="size-container">
                     <span className="size-error hide">Please select a size</span>
                     <div className="size-buttons">
-                        {Object.keys(size).map((val, index) => (
+                        {Object.entries(size).map(([key, qty], index) => (
                             <button key={index} type="button" 
                                 className={`sizeButton 
-                                ${selectedSize === val ? "selectedSize" : ""}`} 
+                                ${selectedSize === key ? "selectedSize" : ""}`} 
                                 onClick={() => {
                                     document.querySelector(".size-error").classList.add("hide");
-                                    setSelectedSize(val)
-                                }} 
+                                    setSelectedSize(key)
+                                }} disabled={qty === 0}
                                 >
-                                <p>{val}</p>
+                                <p>{key}</p>
+                                {(qty < 5 && qty > 0) && <span className="qtyLabel">{qty} left</span>}
+                                {qty === 0 && <span className="size-btn-strike"></span>}
                             </button>
                         ))}
                     </div>
