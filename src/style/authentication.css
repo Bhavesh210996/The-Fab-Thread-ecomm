@@ -184,3 +184,38 @@ label{
 .login-page input:focus {
     border: 1px solid #f2796e !important;
 }
+
+/* media query */
+@media (max-width: 1023px){
+    /* login changes */
+    .login-container{
+        flex-direction: column;
+        align-items: center;
+    }
+    .login-section{
+        width: 100%;
+    }
+    .logo-image{
+        margin-left: 0;
+    }
+    #loginForm{
+        width: 100%;
+    }
+    .login-text{
+        margin: 0;
+    }
+    .login-btn-block svg{
+        right: 135px;
+    }
+    /* signup changes */
+    .signup-section{
+        width: 100%;
+    }
+    .signup-form{
+        padding: 0;
+    }
+    .logo-image{
+        width: 70px;
+        height: 70px;
+    }
+}

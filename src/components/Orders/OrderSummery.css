@@ -28,3 +28,27 @@ p.order-num {
     margin: 0 0 30px 0;
     color: #6a7282;
 }
+
+/* media query */
+@media (max-width: 1023px){
+    .ship-payment-container{
+        width: 100%;
+    }
+    .order-summery-price{
+        width: 100%;
+    }
+    .shipping-box {
+        width: 66%;
+        padding-right: 5px;
+    }
+    .shipping-box h3{
+        font-size: 16px;
+    }
+    .paymentMethod-box {
+        width: 35%;
+        padding-left: 5px;
+    }
+    .paymentMethod-box h3{
+        font-size: 16px;
+    }
+}

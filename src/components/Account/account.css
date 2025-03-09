@@ -37,3 +37,16 @@ table.profile-infoTable {
     text-transform: none;
 }
 
+/* media query */
+@media (max-width: 1023px){
+    .profile-page.mobile-mainContent{
+        margin: 133px 0 0 0;
+    }
+    .profile-container{
+        width: 100%;
+    }
+    .profile-card{
+        border: none;
+        padding: 15px 10px;
+    }
+}

@@ -360,3 +360,6 @@ nav.mobile-nav .header__logo {
     padding: 14px 20px;
     font-weight: normal;
 }
+.userSpecific-section .nav__list li .drpdwn-link:hover{
+    color: var(--color-grey-900);
+}

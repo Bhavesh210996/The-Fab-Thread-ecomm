@@ -412,8 +412,11 @@ input:disabled {
     font-size: 14px;
     padding: 5px;
   }
-  .homepage .category-base-container .column-compo{
-    width: unset;
+  .category-base-container .column-compo{
+    width: 39%;
+  }
+  .offer-banner{
+    height: unset;
   }
 }
 @media (min-width: 1024px) and (max-width: 1199px) {

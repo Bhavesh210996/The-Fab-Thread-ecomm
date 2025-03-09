@@ -125,7 +125,11 @@
     .category-page.mobile-mainContent .productBox .items-row .item-column .item-url .itemDetails{
         padding: 0 0 10px 10px;
     }
+    .menFashion-page.mobile-mainContent{
+        margin: 133px 0 0 0;
+    }
 }
+
 .mobile-filter-container{
     position: fixed;
     left: 0;

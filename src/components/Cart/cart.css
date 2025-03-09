@@ -185,6 +185,9 @@ input:focus-visible {
     font-size: 18px;
     font-weight: bold;
 }
+.discount-green-text{
+    color: #03a685;
+}
 .placeOrder-btn{
     width: 100%;
     font-size: 1rem;
@@ -516,5 +519,20 @@ input:focus-visible {
     }
     .priceBlock-box{
         all: unset;
+    }
+
+    /* address page media query */
+    .address-container{
+        flex-direction: column;
+    }
+    .addressList-box{
+        width: 100%;
+    }
+    /* payment page media query */
+    .payment-container{
+        flex-direction: column;
+    }
+    .card-container{
+        height: auto;
     }
 }

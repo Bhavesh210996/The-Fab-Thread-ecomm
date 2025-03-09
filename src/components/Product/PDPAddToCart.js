@@ -13,6 +13,7 @@ import { useAddreses } from "../Address/useAddreses";
 import PriceBox from "../ui/PriceBox";
 import LoginForm from "../ui/LoginForm";
 import SpinnerMini from "../ui/SpinnerMini";
+import Spinner from "../ui/Spinner";
 
 function PDPAddToCart({productData}) {
     const [selectedSize, setSelectedSize] = useState();
@@ -70,7 +71,8 @@ function PDPAddToCart({productData}) {
                         }
                     })
     }
-    // if(isAddressLoading) return <Spinner />
+    if(isEntriesLoading) return <Spinner />
+
     return (
         <div className="pdp-price-info">
             <div className="pdp-itemName-info">

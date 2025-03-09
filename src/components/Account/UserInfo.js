@@ -38,7 +38,7 @@ function UserInfo() {
                 </tr> */}
             </tbody>
         </table>
-        <Button>Edit</Button>
+        <Button disabled={true}>Edit</Button>
         </div>
     )
 }

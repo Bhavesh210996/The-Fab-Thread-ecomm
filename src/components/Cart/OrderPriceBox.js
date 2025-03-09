@@ -12,7 +12,7 @@ const OrderPriceBox = memo(function OrderPriceBox({priceWithoutDiscount, totalDi
             </div>
             <div className="cart-price-row">
                 <span className="price-text">Discount on MRP</span>
-                <span className="price-amount"> - {formatCurrency(totalDiscount)}</span>
+                <span className="price-amount discount-green-text"> - {formatCurrency(totalDiscount)}</span>
             </div>
             <div className="cart-price-row">
                 <span className="price-text">Platform Fee</span>
