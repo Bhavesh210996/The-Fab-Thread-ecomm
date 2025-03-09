@@ -109,7 +109,7 @@ function PaymentSection({totalCartPrice}) {
                     <p>Cash on delivery (Cash/UPI)</p>
                 </div>
                 <div id="upi" className={`tabLabel ${selectedOption === "upi" ? "tab-selected" : ""}`} onClick={() => {setCodRadioSelected(""); setIsCardData(false); setSelectedOption("upi")}}>
-                    <img src="UPI-color.png" className="upi-img" alt="UPI" />
+                    <img src="/UPI-color.png" className="upi-img" alt="UPI" />
                     <p>UPI (Pay via any app)</p>
                 </div>
                 <div id="card" className={`tabLabel ${selectedOption === "card" ? "tab-selected" : ""}`} onClick={() => {setCodRadioSelected(""); setUpiRadioSelected(""); setSelectedOption("card")}}>
