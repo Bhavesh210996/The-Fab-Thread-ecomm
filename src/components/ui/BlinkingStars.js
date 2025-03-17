@@ -10,10 +10,10 @@ const BlinkingStars = () => {
     canvas.height = window.innerHeight;
 
     const colors = ["white", "#FFD700", "#87CEEB", "#FF69B4"];
-    const stars = Array.from({ length: 1000 }).map(() => ({
+    const stars = Array.from({ length: 500 }).map(() => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      radius: Math.random() * 1 + 0.5,
+      radius: Math.random() * 1 + 0.5, // Reduced size of stars
       opacity: Math.random(),
       speed: Math.random() * 0.005 + 0.002,
       color: colors[Math.floor(Math.random() * colors.length)],
