@@ -435,3 +435,37 @@ input:disabled {
       margin-top: 133px;
   }
 }
+.user-review-star-wrapper {
+  background-color: #14958f;
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 12px;
+  margin-top: 5px;
+  font-weight: bold;
+  width: 5%;
+  height: 0%;
+}
+.homepage-welcome-note {
+  position: absolute;
+  top: 158px;
+  left: 3%;
+  text-align: center;
+}
+.homepage-welcome-text {
+  display: block;
+  color: #ffffff !important;
+  font-weight: bold;
+  font-size: 67px;
+  margin-bottom: 15px;
+}
+span.text-home {
+  font-size: 30px;
+  color: #ffffff;
+}
+.homepage-welcome-text .fab-text{
+  color: oklch(0.645 0.246 16.439);
+}
+.firstLine{
+  display: block;
+}
