@@ -1,5 +1,9 @@
+import useSEO from "../../Hooks/useSEO";
+
 function PDPDetails({productData}) {
     const {description, specification} = productData?.itemDetails;
+    useSEO({description, title: productData?.itemName});
+    
     return (
         <div>
             <div className="desc-box">

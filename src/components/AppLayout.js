@@ -6,11 +6,12 @@ import { useEffect } from "react";
 import SearchBox from "./Header/SearchBox";
 import { useResponsiveQuery } from "../context/MediaQueryContextApi";
 import Header from "./Header/Header";
+import useSEO from "../Hooks/useSEO";
 
 function AppLayout() {
     const {isSidebarOpen} = useSelector((store) => store.cartStates);
     const {isMobile} = useResponsiveQuery();
-    
+    useSEO({description: "", title: ""});
     useEffect(() => {
         if(isSidebarOpen){
             document.body.classList.add("no-scroll");

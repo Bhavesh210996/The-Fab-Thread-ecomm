@@ -4,6 +4,8 @@ import ProductCard from "./ProductCard"
 import { useProductList } from "./useProductList"
 import { useSearchQuery } from "../../context/SearchProductContextApi";
 import { useEffect, useState } from "react";
+import { useCategory } from "../Category/useCategory";
+import useSEO from "../../Hooks/useSEO";
 
 function ProductBox() {
     const [imagesLoaded, setImagesLoaded] = useState();
@@ -24,7 +26,11 @@ function ProductBox() {
     }
 
     const {productsList, isProductsListLoading} = useProductList(filters);
-    
+    const {categories} = useCategory();
+    const category = categories?.filter((category) => category.page === categoryName.toLowerCase());
+
+    useSEO({description: category?.[0].description, title: category?.[0].name})
+
     let productData;
     //category results
     const categoryFilter = productsList?.filter(item => item.categoryName === categoryName.toLowerCase());
