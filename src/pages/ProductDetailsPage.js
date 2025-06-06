@@ -3,7 +3,8 @@ import { useEffect } from "react";
 
 import { useProductList } from "../components/Product/useProductList";
 import Spinner from "../components/ui/Spinner";
-import "../style/productDetails.css"
+import "../style/productDetails.css";
+import "../components/Product/products.css";
 import PDPAddToCart from "../components/Product/PDPAddToCart";
 import PDPDetails from "../components/Product/PDPDetails";
 import PDPRating from "../components/Product/PDPRating";

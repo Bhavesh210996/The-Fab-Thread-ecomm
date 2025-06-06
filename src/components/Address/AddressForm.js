@@ -42,10 +42,12 @@ function AddressForm({editFormData = {}, setFormData, editId, onCloseModal}) {
                 pincodeDataFn(value, {
                     onSuccess: (data) => {
                         console.log("pincodeData", data)
-                        if(editSession){
-                            setFormData((prevData) => ({
-                                ...prevData, city: data?.[0].PostOffice[0].Block, state: data?.[0].PostOffice[0].State
-                            }))
+                        if(data?.[0].Status !== "Error"){
+                            if(editSession){
+                                setFormData((prevData) => ({
+                                    ...prevData, city: data?.[0].PostOffice[0].Block, state: data?.[0].PostOffice[0].State
+                                }))
+                            }
                         }
                     }})
             }
@@ -137,14 +139,14 @@ function AddressForm({editFormData = {}, setFormData, editId, onCloseModal}) {
                     <FormError>Required</FormError>
                 </FormRow>
 
-                {!pincodeData ? (
+                {!pincodeData?.[0]?.PostOffice ? (
                     <FormRow>
                         <Input type="text" name="locality" placeholder="Locality/Town*" elRef={(el) => (ref.current[3] = el)} value={locality} onChange={handleChange}/>
                         <FormError>Required</FormError>
                     </FormRow>
                 ) : (
                 <select id="locality-drpdwn" className="add-input-field" name="locality" placeholder="Locality/Town*">
-                    {pincodeData?.[0].PostOffice.map((town, index) => 
+                    {pincodeData?.[0]?.PostOffice.map((town, index) => 
                         <option key={index}>{town.Name}</option>
                         )}
                 </select>
@@ -152,12 +154,12 @@ function AddressForm({editFormData = {}, setFormData, editId, onCloseModal}) {
 
                 <div className="add-city-state">
                     <FormRow>
-                        <Input type="text" name="city" elRef={(el) => (ref.current[4] = el)} value={city ? city : pincodeData?.[0].PostOffice[0].Block || ""} placeholder="City/District*" readOnly />
+                        <Input type="text" name="city" elRef={(el) => (ref.current[4] = el)} value={city ? city : pincodeData?.[0].PostOffice?.[0].Block || ""} placeholder="City/District*" readOnly />
                         <FormError>Required</FormError>
                     </FormRow>
                     
                     <FormRow>
-                        <Input type="text" name="state" elRef={(el) => (ref.current[5] = el)} value={state? state : pincodeData?.[0]?.PostOffice[0].State || ""} placeholder="State*" readOnly/>
+                        <Input type="text" name="state" elRef={(el) => (ref.current[5] = el)} value={state? state : pincodeData?.[0]?.PostOffice?.[0].State || ""} placeholder="State*" readOnly/>
                         <FormError>Required</FormError>
                     </FormRow>
                 </div>

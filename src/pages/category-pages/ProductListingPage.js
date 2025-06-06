@@ -4,6 +4,7 @@ import { useResponsiveQuery } from "../../context/MediaQueryContextApi";
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 
 import "../../components/Product/products.css";
+import "../../components/Category/category.css";
 import FilterBox from "../../components/ui/FilterBox";
 import ProductBox from "../../components/Product/ProductBox";
 import { productsLoading } from "../../context/ProductsSlice";

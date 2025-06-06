@@ -2,27 +2,12 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
-import { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import './App.css';
 import './style/style.css'
 
-import AppLayout from './components/AppLayout';
-import MenFashion from './pages/MenFashion';
-import Homepage from './pages/Homepage';
-import WomenFashion from './pages/WomenFashion';
-import ProductListingPage from './pages/category-pages/ProductListingPage';
-import ProductDetailsPage from './pages/ProductDetailsPage';
-import Cart from './pages/Cart';
-import Address from './pages/Address';
-import Payment from './pages/Payment';
-import OrderConfirmation from './pages/OrderConfirmation';
-import Login from './pages/Login';
-import ProtectedRoute from './components/ui/ProtectedRoute';
-import YourOrders from './pages/YourOrders';
-import Profile from './pages/Profile';
-import SignUp from './pages/SignUp';
 import ScrollToTop from './components/ui/ScrollToTop';
 
 import { SearchProductContextProvider } from './context/SearchProductContextApi';
@@ -30,6 +15,24 @@ import { SelectAddressContextProvider } from './context/SelectAddressContextApi'
 import { CartEntryCountProvider } from './context/CartEntryCountContextApi';
 import { getUser } from './context/CartSlice';
 import { MediaQueryContextProvider } from './context/MediaQueryContextApi';
+import Spinner from './components/ui/Spinner';
+
+const Homepage = React.lazy(() => import('./pages/Homepage'));
+const ProductListingPage = React.lazy(() => import('./pages/category-pages/ProductListingPage'));
+const AppLayout = React.lazy(() => import('./components/AppLayout'));
+const ProtectedRoute = React.lazy(() => import('./components/ui/ProtectedRoute'));
+const MenFashion = React.lazy(() => import('./pages/MenFashion'));
+const WomenFashion = React.lazy(() => import('./pages/WomenFashion'));
+const ProductDetailsPage = React.lazy(() => import('./pages/ProductDetailsPage'));
+const Cart = React.lazy(() => import('./pages/Cart'));
+const Address = React.lazy(() => import('./pages/Address'));
+const Payment = React.lazy(() => import('./pages/Payment'));
+const OrderConfirmation = React.lazy(() => import('./pages/OrderConfirmation'));
+const Login = React.lazy(() => import('./pages/Login'));
+const YourOrders = React.lazy(() => import('./pages/YourOrders'));
+const Profile = React.lazy(() => import('./pages/Profile'));
+const SignUp = React.lazy(() => import('./pages/SignUp'));
+
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -55,6 +58,8 @@ function App() {
       <ReactQueryDevtools initialIsOpen={false} />
       <BrowserRouter>
       <ScrollToTop />
+      <Suspense fallback={<Spinner />}>
+
         <Routes>
 
           <Route element={<AppLayout />}>
@@ -76,6 +81,7 @@ function App() {
           <Route path='signup' element={<SignUp />} />
             
         </Routes>
+      </Suspense>
       </BrowserRouter>
       <Toaster position="top-center" gutter={12} containerStyle={{margin: "8px"}} toastOptions={{
         success:{

@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import "../../style/authentication.css";
 import { useSignup } from "../Authentication/useSignup";
+import "../Header/Header.css";
 import Spinner from "../ui/Spinner";
 import useFocus from "../../Hooks/useFocus";
 import { emailValidationFn, passwordValidationFn } from "../../Utils/helpers";

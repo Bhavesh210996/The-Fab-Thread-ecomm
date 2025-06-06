@@ -2,7 +2,8 @@ import { useUser } from "../components/Authentication/useUser";
 import { useOrders } from "../components/Orders/useOrders"
 import Spinner from "../components/ui/Spinner";
 import OrderBox from "../components/ui/OrderBox";
-import "../style/orders.css"
+import "../style/orders.css";
+import "../components/Cart/cart.css";
 import { useSelector } from "react-redux";
 
 function YourOrders() {

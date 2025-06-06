@@ -29,7 +29,7 @@ function ProductBox() {
     const {categories} = useCategory();
     const category = categories?.filter((category) => category.page === categoryName.toLowerCase());
 
-    useSEO({description: category?.[0].description, title: category?.[0].name})
+    useSEO({description: category?.[0]?.description, title: category?.[0]?.name})
 
     let productData;
     //category results

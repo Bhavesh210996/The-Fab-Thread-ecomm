@@ -1,6 +1,7 @@
 import Spinner from "../ui/Spinner";
 import CategoryCard from "./CategoryCard";
 import { useCategory } from "./useCategory"
+import "../Category/category.css";
 
 function Category({genderType}) {
     const {categories, isCategoriesLoading} = useCategory();

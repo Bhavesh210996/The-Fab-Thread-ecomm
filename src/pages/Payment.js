@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-
+import "../components/Cart/cart.css";
 import CartPriceBox from "../components/Cart/CartPriceBox"
 import PaymentSection from "../components/Payment/PaymentSection";
 

@@ -1,5 +1,4 @@
 import RatingBar from "./RatingBar";
-
 function PDPRating({productData}) {
     const {userRatings} = productData;
 

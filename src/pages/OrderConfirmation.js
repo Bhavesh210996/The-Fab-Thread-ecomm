@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import OrderedItems from "../components/Orders/OrderedItems";
 import "../components/Orders/OrderSummery.css";
+import "../components/Cart/cart.css";
 import { useEffect } from "react";
 
 function OrderConfirmation() {
