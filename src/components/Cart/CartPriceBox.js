@@ -7,23 +7,25 @@ import Button from "../ui/Button";
 import OrderPriceBox from "./OrderPriceBox";
 import { PLATFORM_FEE, SHIPPING_FEE } from "../../Utils/Constants";
 import { useSelector } from "react-redux";
-import { memo } from "react";
+import { memo, useEffect, useMemo } from "react";
 
 const CartPriceBox = memo(function CartPriceBox({type, setTotalCartPrice}) {
     const navigate = useNavigate();
     const {selectedAddress, user} = useSelector((store) => store.cartStates)
     const {cartEntries, isEntriesLoading} = useCartEntries();
     
-    const currentUserEntries = cartEntries?.filter((entry) => entry.userId === user?.id);
+    const currentUserEntries = useMemo(() => cartEntries?.filter((entry) => entry.userId === user?.id), [cartEntries, user?.id]);
 
-    const priceWithoutDiscount = currentUserEntries?.reduce((acc, curr) => acc + (curr.products?.discountPrice * curr.quantity || 0), 0);
-    const priceWithDiscount = currentUserEntries?.reduce((acc, curr) => acc + (curr.products?.price * curr.quantity || 0), 0)
+    const priceWithoutDiscount = useMemo(() => currentUserEntries?.reduce((acc, curr) => acc + (curr.products?.discountPrice * curr.quantity || 0), 0), [currentUserEntries]);
+    const priceWithDiscount = useMemo(() => currentUserEntries?.reduce((acc, curr) => acc + (curr.products?.price * curr.quantity || 0), 0), [currentUserEntries]);
 
     const totalDiscount = priceWithoutDiscount - priceWithDiscount;
     
     const totalCartAmount = priceWithDiscount + PLATFORM_FEE + SHIPPING_FEE;
 
-    type === "order" && setTotalCartPrice(totalCartAmount)
+    useEffect(() => {
+        type === "order" && setTotalCartPrice(totalCartAmount)
+    }, [type, setTotalCartPrice, totalCartAmount])
 
     if(isEntriesLoading) return null;
     return (

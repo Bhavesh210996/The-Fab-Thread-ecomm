@@ -10,7 +10,7 @@ const productsSlice = createSlice({
     name: "products",
     initialState,
     reducers: {
-        productsLoading(state, action){
+        setProductsList(state, action){
             state.productsList = action.payload;
             state.isProductsListLoading = false;
         },
@@ -19,12 +19,12 @@ const productsSlice = createSlice({
         }
     }
 })
-
-export const productsLoading = () =>{
+export const {setProductsList, loader} = productsSlice.actions;
+export const fetchProductsList = () =>{
     return async function(dispatch){
-        dispatch({type: "products/loader"})
+        dispatch(loader())
         const data = await getProductsList()
-        dispatch({type: "products/productsLoading", payload: data})
+        dispatch(setProductsList(data))
     }
 }
 

@@ -7,7 +7,7 @@ import "../../components/Product/products.css";
 import "../../components/Category/category.css";
 import FilterBox from "../../components/ui/FilterBox";
 import ProductBox from "../../components/Product/ProductBox";
-import { productsLoading } from "../../context/ProductsSlice";
+import { fetchProductsList } from "../../context/ProductsSlice";
 import MobileFilterBox from "../../components/Product/MobileFilterBox";
 import { toggleFilterSideBar } from "../../context/CartSlice";
 
@@ -17,7 +17,7 @@ function ProductListingPage() {
 
     //Filter
     useEffect(() => {
-        dispatch(productsLoading())
+        dispatch(fetchProductsList())
     }, [])
 
     return (

@@ -37,14 +37,14 @@ const cartSlice = createSlice({
         }
     }
 })
+export const { setCartCount, setSelectAddress, toggleSidebar, toggleFilterSideBar, getUser: setUser, loader } = cartSlice.actions;
 
 export const getUser = () => {
     return async function(dispatch){
-        dispatch({type: "carts/loader"})
+        dispatch(loader())
         const userData = await getCurrentUser();
-        dispatch({type: "carts/getUser", payload: userData})
+        dispatch(setUser(userData))
     }
 }
 
-export const {setCartCount, setSelectAddress, toggleSidebar, toggleFilterSideBar} = cartSlice.actions;
 export default cartSlice.reducer;
