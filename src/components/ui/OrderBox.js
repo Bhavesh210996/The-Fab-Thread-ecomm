@@ -5,8 +5,10 @@ import { useSetItemRating } from "../Product/useSetItemRating";
 import Rating from "./Rating";
 import { useQueryClient } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
+import useInView from "../../Hooks/useInView";
 
 function OrderBox({order}) {
+    const [ref, hasBeenInView] = useInView({ threshold: 0.2})
     const {id: orderId, productDetails, userRating, productId} = order;
     // const {user} = useUser();
     const {user} = useSelector((store) => store.cartStates);
@@ -57,7 +59,7 @@ function OrderBox({order}) {
     }
 
     return (
-        <div className="order-box">
+        <div className={`order-box ${hasBeenInView ? "visible" : ""}`} ref={ref}>
             <div className="item-img-box">
                 <img src={itemImage ? itemImage : "imgNotFound.webp"} alt="itemImage" />
             </div>

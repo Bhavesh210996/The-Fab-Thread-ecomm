@@ -10,11 +10,12 @@ import ConfirmDelete from "../ui/ConfirmDelete";
 import { useAddToCart } from "./useAddToCart";
 import SpinnerMini from "../ui/SpinnerMini";
 import PriceBox from "../ui/PriceBox";
+import useInView from "../../Hooks/useInView";
 
 const CartEntry = memo(function CartEntry({item}) {
     const [itemQuantity, setItemQuantity] = useState(1)
     const queryClient = useQueryClient();
-
+    const [ref, hasBeenInView] = useInView({ threshold: 0.2})
     const {id:itemId, productSize, quantity, products} = item;
     const {id, size, itemName, brand, price, discount, discountPrice, itemImage, itemType} = products;
     const {addToCartFn, isAddingCart} = useAddToCart();
@@ -47,7 +48,7 @@ const CartEntry = memo(function CartEntry({item}) {
     }
 
     return (
-        <div className="cart-entry">
+        <div className={`cart-entry ${hasBeenInView ? "visible" : ""}`} ref={ref}>
             <div className="item-img-box">
                 <img src={itemImage ? itemImage : "imgNotFound.webp"} alt="itemImage" />
             </div>

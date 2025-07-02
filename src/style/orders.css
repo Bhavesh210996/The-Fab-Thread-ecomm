@@ -56,3 +56,16 @@ textarea.review-text-area {
 textarea:focus-visible{
     outline: 1px solid #f16565;
 }
+.order-box {
+  opacity: 0;
+}
+
+.order-box.visible {
+  animation: fadeScaleIn 1s forwards;
+}
+
+@keyframes fadeScaleIn {
+  to {
+    opacity: 1;
+  }
+}

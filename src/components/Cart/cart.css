@@ -536,3 +536,16 @@ input:focus-visible {
         height: auto;
     }
 }
+.cart-entry {
+  opacity: 0;
+}
+
+.cart-entry.visible {
+  animation: fadeScaleIn 1s forwards;
+}
+
+@keyframes fadeScaleIn {
+  to {
+    opacity: 1;
+  }
+}
