@@ -1,42 +1,75 @@
 import {graphQlClient, supabase} from "./supabase";
 
 export async function getCurrentUserOrders(){
-    const query = `
-        query {
-            ordersCollection(orderBy: [{ id: AscNullsFirst }]){
-                edges{
-                    node{
-                        id
-                        userId
-                        productId
-                        productDetails{
-                            brand
-                            itemName
-                            size
-                            quantity
-                            price
-                            itemImage
+    let allEdges = [];
+    let hasNextPage = true;
+    let cursor = null;
+
+    while(hasNextPage){
+        const query = `
+            query {
+                ordersCollection(
+                first: 100,
+                ${cursor ? `after: "${cursor}",` : ""}
+                orderBy: [{ id: AscNullsFirst }]
+                ){
+                    edges{
+                        node{
+                            id
+                            userId
+                            productId
+                            orderid
+                            address{
+                                city
+                                state
+                                houseNo
+                                pincode
+                                locality
+                                userName
+                                userMobNo
+                            }
+                            productDetails{
+                                brand
+                                itemName
+                                size
+                                quantity
+                                price
+                                itemImage
+                            }
+                            userRating{
+                                orderReview
+                                date
+                                orderRating
+                            }
                         }
-                        userRating{
-                            orderReview
-                            date
-                            orderRating
-                        }
+                        cursor
+                    }
+                    pageInfo{
+                        hasNextPage
+                        endCursor
                     }
                 }
             }
-        }
-    `;
-    const data = await graphQlClient.request(query);
+        `;
+        const data = await graphQlClient.request(query);
+        const edges = data?.ordersCollection?.edges || [];
+        allEdges = [...allEdges, ...edges];
 
-    return data?.ordersCollection?.edges?.map(edge => { 
+        hasNextPage = data?.ordersCollection?.pageInfo?.hasNextPage;
+        cursor = data?.ordersCollection?.pageInfo?.endCursor;
+
+        if (!hasNextPage || edges.length === 0) break;
+    }
+    return allEdges.map(edge => {
         const details = JSON.parse(edge.node.productDetails);
         const rating = JSON.parse(edge.node.userRating);
+        const address = JSON.parse(edge.node.address);
 
         return {
             ...edge.node,
             productDetails: details,
             userRating: rating,
+            address: address
         };
     });
     // const {data, error} = await supabase.from("orders").select("*").order('id', { ascending: true })

@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
 import { supabase } from "../../services/supabase";
 import { renderWithProviders } from "../../test.utils";
 import PDPAddToCart from "./PDPAddToCart";
@@ -61,7 +60,7 @@ describe("PDPAddToCart componenent", () => {
                     return{
                         select: jest.fn().mockReturnValue({
                             order: jest.fn().mockResolvedValue({
-                              data: mockCartEntries, // include `products` field too
+                              data: mockCartEntries,
                               error: null
                             })
                         })
