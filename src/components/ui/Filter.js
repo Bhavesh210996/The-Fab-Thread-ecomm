@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSearchParams } from "react-router-dom"
 
-function Filter({filterData, type, filterField, products = []}) {
+const Filter = React.memo(function Filter({filterData, type, filterField, products = []}) {
     const [searchParams, setSearchParams] = useSearchParams();
 
     //to remove the params if any checkbox is not checked
@@ -14,7 +14,6 @@ function Filter({filterData, type, filterField, products = []}) {
         }
         setSearchParams(searchParams);
     }, [searchParams])
-
     function handleCheckbox(e) {
         const checkboxValue = e.target.value;
         const isChecked = e.target.checked;
@@ -41,7 +40,7 @@ function Filter({filterData, type, filterField, products = []}) {
     }
 
     return (
-        <div className={`filter ${type ? `filter-${type}`  : ""}`}>
+        <div className={`filter ${type ? `filter-${type}`  : ""}`} data-testid={type}>
             <span className="filter-title">{type}</span>
             <div className="filter-box">
                 {filterData?.map((value, index) => 
@@ -59,6 +58,6 @@ function Filter({filterData, type, filterField, products = []}) {
             </div>
         </div>
     )
-}
+})
 
 export default Filter

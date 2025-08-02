@@ -100,12 +100,12 @@
 }
 
 body{
-    font-family: Nunito Sans,sans-serif;
-    font-family: "Lato", serif;;
-    color: var(--color-grey-700);
-    /* font-weight: 400; */
-    line-height: 1.5;
-    min-height: calc(100vh - 8vw);
+    /* font-family: Nunito Sans,sans-serif;
+    font-family: "Lato", serif;; */
+    /* color: var(--color-grey-700); */
+    font-weight: 500;
+    /* line-height: 1.5; */
+    /* min-height: calc(100vh - 8vw); */
     /* height: 100vh; */   
 }
 body.no-scroll{

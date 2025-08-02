@@ -1,5 +1,5 @@
 import { HiMiniXMark } from "react-icons/hi2"
-import FilterBox from "../ui/FilterBox"
+import FilterBox from "./FilterBox"
 import { useDispatch, useSelector } from "react-redux"
 import { toggleFilterSideBar } from "../../context/CartSlice";
 

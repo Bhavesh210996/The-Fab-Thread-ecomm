@@ -1,4 +1,4 @@
-import supabase from "./supabase";
+import {supabase} from "./supabase";
 
 export async function createNewCartEntry(entry, id){
     let query = supabase.from("cartEntries");

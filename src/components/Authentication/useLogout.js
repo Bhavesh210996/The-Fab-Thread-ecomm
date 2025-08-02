@@ -16,5 +16,5 @@ export function useLogout(){
         }
     })
 
-    return useMemo(() => ({logout, userLoggingOut}), [logout])
+    return useMemo(() => ({logout, userLoggingOut}), [logout, userLoggingOut])
 }

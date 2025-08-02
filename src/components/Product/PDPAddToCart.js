@@ -11,7 +11,7 @@ import Modal from "../ui/Modal";
 import SelectPincode from "./SelectPincode";
 import { useAddreses } from "../Address/useAddreses";
 import PriceBox from "../ui/PriceBox";
-import LoginForm from "../ui/LoginForm";
+import LoginForm from "../Authentication/LoginForm";
 import SpinnerMini from "../ui/SpinnerMini";
 import Spinner from "../ui/Spinner";
 
@@ -21,7 +21,6 @@ function PDPAddToCart({productData}) {
     const [productInCart, setProductInCart] = useState();
     const [selectedPin, setSelectedPin] = useState();
     const [selectedAddress, setSelectedAddress] = useState();
-
     const navigate = useNavigate();
     const {user, isAuthenticated} = useSelector((store) => store.cartStates);
 
@@ -30,7 +29,6 @@ function PDPAddToCart({productData}) {
     const currentUseradd = {field:"userId" , value: user?.id}
     const {addreses, isAddressLoading} = useAddreses(currentUseradd);
     const {addToCartFn, isAddingCart} = useAddToCart();
-
     useEffect(() =>{
         const entry = cartEntries?.filter((entry) => entry.productId === id && entry.productSize === selectedSize && user?.id === entry.userId);
         setProductInCart(entry);
@@ -98,6 +96,7 @@ function PDPAddToCart({productData}) {
                                     document.querySelector(".size-error").classList.add("hide");
                                     setSelectedSize(key)
                                 }} disabled={qty === 0}
+                                data-testid="sizeButton"
                                 >
                                 <p>{key}</p>
                                 {(qty < 5 && qty > 0) && <span className="qtyLabel">{qty} left</span>}
@@ -112,7 +111,7 @@ function PDPAddToCart({productData}) {
                     !isAuthenticated ? 
                     <Modal>
                         <Modal.Open opens="login">
-                            <Button onClick={handleAddToCart} disabled={isAddingCart}>
+                            <Button onClick={handleAddToCart} disabled={isAddingCart} data-testid="addTocart">
                                 <HiShoppingBag />
                                 <span>Add To Cart</span>
                             </Button> 

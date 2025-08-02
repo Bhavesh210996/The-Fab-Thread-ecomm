@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { useSelector } from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom"
 import { HiHeart, HiShoppingBag, HiUser } from "react-icons/hi2"
 
@@ -9,13 +9,12 @@ import useCartCount from "../../Hooks/useCartCount";
 import { useLogout } from "../Authentication/useLogout";
 import Logo from "./Logo";
 
-function DesktopNav() {
+const DesktopNav = React.memo(function DesktopNav() {
   const [isDrpDwnOpen, setIsDrpDwnOpen] = useState(false);
   const navigate = useNavigate();
   const {cartCount} = useCartCount();
-  const {user} = useSelector((store) => store.cartStates);
+  const user = useSelector((store) => store.cartStates.user, shallowEqual);
   const {logout, userLoggingOut} = useLogout();
-
   const handleDrpDwnToggle = useCallback(() => {
     setIsDrpDwnOpen(prev => !prev)
   }, [])
@@ -72,6 +71,6 @@ function DesktopNav() {
         </ul>
     </nav>
   )
-}
+})
 
 export default DesktopNav

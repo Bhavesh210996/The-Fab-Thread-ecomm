@@ -12,6 +12,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 function SignUpForm({isPopupSession, onClose}) {
     const [password, setPassword] = useState();
+    const [passwordError, setPasswordError] = useState("");
     const ref = useRef([])
     const {signupFn, isSigningUp} = useSignup();
     const navigate = useNavigate()
@@ -63,14 +64,13 @@ function SignUpForm({isPopupSession, onClose}) {
         if(!email || !password || !fullName || !phone) return null;
 
         const value = ref.current[4].value;
-        const sibling = ref.current[4].nextElementSibling;
 
         if(value){
             if(value !== password){
-                if(sibling){
-                    sibling.classList.remove("hide");
-                    sibling.innerText = "Password is not matching"
-                }
+                setPasswordError("Password is not matching")
+                return;
+            }else{
+                setPasswordError("")
             }
         }
         signupFn({email, password, 
@@ -113,7 +113,7 @@ function SignUpForm({isPopupSession, onClose}) {
                     </div>
                     <div className="repeatPassword-sec">
                         <input type="password" className="input-field" name="passwordConfirm" placeholder="Repeat Password" ref={(el) => (ref.current[4] = el)}/>
-                        <span className="error-box hide">Required</span>
+                        {passwordError && <span className="error-box">{passwordError}</span>}
                     </div>
                     <div className="termsCondition-block">
                         <p>By continuing, you agree to FabThread's <span>Terms of Use</span> & <span>Privacy Policy</span></p>

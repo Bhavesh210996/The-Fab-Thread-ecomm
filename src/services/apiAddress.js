@@ -1,4 +1,4 @@
-import supabase from "./supabase";
+import {supabase} from "./supabase";
 
 export async function addNewAddress(newAddress){
     const {data, error} = await supabase

@@ -1,7 +1,6 @@
 import RatingBar from "./RatingBar";
 function PDPRating({productData}) {
     const {userRatings} = productData;
-
     const noOfRating = userRatings?.length;
     const totalRating = userRatings?.reduce((acc, curr) => acc + Number(curr.rating), 0);
     const avgRating = Math.ceil((totalRating / noOfRating) * 10) / 10
@@ -21,7 +20,7 @@ function PDPRating({productData}) {
     }
     
     return (
-        <div className="pdp-rating-section">
+        <div className="pdp-rating-section" data-testid="pdp-rating-section">
             <div className="ave-rating-container">
                 <div className="avg-rating-box">
                     <span className="avg-rating">{avgRating}</span>

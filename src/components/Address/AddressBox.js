@@ -33,7 +33,11 @@ function AddressBox({address, defaultAddress}) {
     return (
         <div className="addressBlock">
             <div>
-                <input type="radio" className="address-radio" checked={selectedAddress ? Number(selectedAddress) === address.id : false} value={address.id} onChange={() => dispatch(setSelectAddress(address.id))}/>
+                <input type="radio" className="address-radio" 
+                    checked={selectedAddress ? Number(selectedAddress) === address.id : defaultAddress ? defaultAddress === address.id : false} 
+                    value={address.id} 
+                    onChange={() => dispatch(setSelectAddress(address.id))}
+                />
             </div>
             <div>
                 <AddressDetails addressDetails={addressDetails} />

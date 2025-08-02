@@ -12,8 +12,8 @@ function ProductCard({item}) {
     const productUrl = `/${itemType}/${brand}/${itemName.replace(/ /g, '-')}/${id}`;
     
     return (
-        <div className={`item-column product-card product-card${hasBeenInView ? " visible" : ""}`} ref={ref}>
-            <Link className="item-url" to={productUrl}>
+        <div className={`item-column product-card product-card${hasBeenInView ? " visible" : ""}`} data-testid="product-card" ref={ref}>
+            <Link className="item-url" to={productUrl} data-testid="product-url">
                 <img className="itemImg" src={itemImage ? itemImage : "imgNotFound.webp"} alt={itemName} />
                 {userRatings?.length && 
                     <RatingWrapper rating={avgRating} />

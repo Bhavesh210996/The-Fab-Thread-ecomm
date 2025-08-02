@@ -13,7 +13,6 @@ import PDPReview from "../components/Product/PDPReview";
 function ProductDetailsPage() {
     const {productId} = useParams();
     const {productsList, isProductsListLoading} = useProductList([]);
-
     useEffect(() => {
         document.querySelector(".mobile-search-box")?.classList.add("hide");
     }, [])
@@ -26,7 +25,7 @@ function ProductDetailsPage() {
 
 
     return (
-        <div className="productDetails-page mobile-mainContent">
+        <div className="productDetails-page mobile-mainContent" data-testid="Product-details-page">
             <div className="productTitle-container">
                 <div className="productImg-box">
                     <img src={itemImage ? itemImage : "/imgNotFound.webp"} alt="" />

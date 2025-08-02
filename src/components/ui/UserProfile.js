@@ -1,12 +1,11 @@
 import { NavLink } from "react-router-dom"
-import { useUser } from "../Authentication/useUser"
 import { HiMiniFolderOpen, HiOutlineArrowRightOnRectangle, HiUser } from "react-icons/hi2";
 import SpinnerMini from "./SpinnerMini";
 import React from "react";
-import { useSelector } from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
   
 const UserProfile = React.memo(function UserProfile({onLogout, userLoggingOut}) {
-    const {user} = useSelector((store) => store.cartStates);
+    const user = useSelector((store) => store.cartStates.user, shallowEqual);
     const {fullName, avatar} = user?.user_metadata;
 
     return (

@@ -2,13 +2,13 @@
 /* eslint-disable no-sequences */
 import toast from "react-hot-toast";
 import { useState } from "react";
-import { useLogin } from "../Authentication/useLogin";
-import Spinner from "./Spinner";
+import { useLogin } from "./useLogin";
+import Spinner from "../ui/Spinner";
 import Logo from "../Header/Logo";
 import { NavLink, useNavigate } from "react-router-dom";
 import SignUpForm from "../Account/SignUpForm";
 import { useQueryClient } from "@tanstack/react-query";
-import SpinnerMini from "./SpinnerMini";
+import SpinnerMini from "../ui/SpinnerMini";
 import { useDispatch } from "react-redux";
 import { getUser } from "../../context/CartSlice";
 
@@ -46,7 +46,6 @@ function LoginForm({isPopupSession, onCloseModal}) {
           setPassword("")
         },
         onError: () =>{
-          // document.querySelector(".error-block").classList.remove("hide")  
           toast.error("Login Failed due to invalid login credentials")
         }
       })
@@ -64,6 +63,7 @@ function LoginForm({isPopupSession, onCloseModal}) {
               type="email"
               id="email"
               autoComplete="email"
+              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={isLoggingIn}
@@ -75,6 +75,7 @@ function LoginForm({isPopupSession, onCloseModal}) {
               type="password"
               id="password"
               autoComplete="current-password"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               disabled={isLoggingIn}
@@ -91,7 +92,7 @@ function LoginForm({isPopupSession, onCloseModal}) {
         </form>
         <div className="signup-link auth-link">
           {isPopupSession === "true" ? 
-                <button onClick={handleSignupForm}>New to FabThread? Create an account</button>
+                <button data-testid="toSignupForm" onClick={handleSignupForm}>New to FabThread? Create an account</button>
             :
             <NavLink to="/signup">New to FabThread? Create an account</NavLink>
           }
@@ -100,6 +101,6 @@ function LoginForm({isPopupSession, onCloseModal}) {
       {signUpOpen && <SignUpForm isPopupSession={isPopupSession} onClose={onCloseModal}/>}
       </>
     )
-  }
+}
 
 export default LoginForm

@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 
 function ProtectedRoute({children}) {
     const navigate = useNavigate();
-    // const {isUserLoading, isAuthenticated} = useUser();
     const {isUserLoading, isAuthenticated} = useSelector((store) => store.cartStates);
 
     useEffect(() => {

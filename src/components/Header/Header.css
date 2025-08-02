@@ -57,16 +57,6 @@
     color: var(--color-grey-700)
 }
 
-/* @media only screen and (max-width: 61.25em) {
-    .search__field {
-        width:auto
-    }
-
-    .search__field::placeholder {
-        color: #fff
-    }
-} */
-
 .search__btn {
     font-weight: 600;
     font-family: inherit;
@@ -88,6 +78,9 @@
 .nav {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 10px;
 }
 
 .nav__list {
@@ -97,6 +90,7 @@
     padding-left: 0;
     margin-left: 40px;
     color: #181a1c;
+    font-family: "FabThread";
 }
 
 .nav__item {
@@ -104,7 +98,7 @@
 }
 
 .nav__btn {
-    font-size: 15px;
+    font-size: 1rem;
     height: 100%;
     font-family: inherit;
     color: inherit;

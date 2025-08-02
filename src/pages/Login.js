@@ -1,4 +1,4 @@
-import LoginForm from "../components/ui/LoginForm"
+import LoginForm from "../components/Authentication/LoginForm";
 import { useResponsiveQuery } from "../context/MediaQueryContextApi"
 import "../style/authentication.css"
 function Login() {

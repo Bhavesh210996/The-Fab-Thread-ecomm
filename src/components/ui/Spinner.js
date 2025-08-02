@@ -28,7 +28,7 @@ function Spinner({type}){
     }
   }
   return(
-    <div className="spinner" style={style}></div>
+    <div className="spinner" data-testid="spinner" style={style}></div>
   )
 }
 export default Spinner;

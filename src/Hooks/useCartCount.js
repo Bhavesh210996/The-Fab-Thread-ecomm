@@ -1,13 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 import { useCartEntries } from "../components/Cart/useCartEntries";
 import { setCartCount } from "../context/CartSlice";
 
 function useCartCount() {
-    const {cartCount} = useSelector((store) => store.cartStates)
+    const cartCount = useSelector((store) => store.cartStates.cartCount, shallowEqual)
     const {cartEntries, isEntriesLoading} = useCartEntries();
-    const {user} = useSelector((store) => store.cartStates);
+    const user = useSelector((store) => store.cartStates.user, shallowEqual);
     const dispatch = useDispatch();
     
     useEffect(() => {

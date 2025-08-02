@@ -5,7 +5,7 @@ import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 
 import "../../components/Product/products.css";
 import "../../components/Category/category.css";
-import FilterBox from "../../components/ui/FilterBox";
+import FilterBox from "../../components/Product/FilterBox";
 import ProductBox from "../../components/Product/ProductBox";
 import { fetchProductsList } from "../../context/ProductsSlice";
 import MobileFilterBox from "../../components/Product/MobileFilterBox";
@@ -14,7 +14,6 @@ import { toggleFilterSideBar } from "../../context/CartSlice";
 function ProductListingPage() {
     const dispatch = useDispatch();
     const {isMobile} = useResponsiveQuery();
-
     //Filter
     useEffect(() => {
         dispatch(fetchProductsList())
@@ -22,7 +21,7 @@ function ProductListingPage() {
 
     return (
         <div className="category-page mobile-mainContent">
-            {!isMobile ? <FilterBox /> : <MobileFilterBox />}
+            {!isMobile ? <FilterBox data-testid="desktop-filter" /> : <MobileFilterBox />}
             <ProductBox />
             {isMobile && <div className="select-filter-btn">
                 <button type="button" onClick={() => dispatch(toggleFilterSideBar(true))}>
