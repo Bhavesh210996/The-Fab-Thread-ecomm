@@ -86,9 +86,10 @@
 }
 .ratings-heading {
     color: var(--color-grey-900);
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     text-transform: uppercase;
+    font-family: "FabThread";
 }
 .line-separator {
     margin: 0 40px;

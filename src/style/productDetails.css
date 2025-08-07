@@ -165,15 +165,17 @@ span.qtyLabel {
     /* border-left: 1px solid #eaeaec; */
 }
 .text-head{
+    font-family: 18px;
     color: var(--color-grey-900);
     font-weight: bold;
     text-transform: uppercase;
+    font-family: "FabThread";
 }
 .text-value {
     font-size: 14px;
 }
 .specification-box{
-    margin-top: 10px;
+    margin-top: 15px;
 }
 .size-fit-box {
     display: flex;

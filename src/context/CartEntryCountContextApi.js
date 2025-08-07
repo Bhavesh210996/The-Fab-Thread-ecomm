@@ -1,8 +1,8 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useCartEntries } from "../components/Cart/useCartEntries";
 import Spinner from "../components/ui/Spinner";
 import { useUser } from "../components/Authentication/useUser";
-import { useSelector } from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
 
 const CartEntryCountContextApi = createContext();
 
@@ -10,9 +10,11 @@ function CartEntryCountProvider({children}){
     const [cartCount, setCartCount] = useState(0);
     const {cartEntries, isEntriesLoading} = useCartEntries();
     // const {user} = useUser();
-    const {user} = useSelector((store) => store.cartStates);
+    const user = useSelector((store) => store.cartStates.user, shallowEqual);
 
-    const currentUserEntries = cartEntries?.filter((entry) => entry.userId === user?.id);
+    const currentUserEntries = useMemo(() => {
+        cartEntries?.filter((entry) => entry.userId === user?.id)
+    }, [cartEntries, user?.id]);
 
     useEffect(() => {
         const count = currentUserEntries?.reduce((acc, curr) => acc + curr.quantity, 0)

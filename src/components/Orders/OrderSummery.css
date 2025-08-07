@@ -10,13 +10,25 @@
     display: flex;
     justify-content: space-between;
 }
+.ship-payment-container .shipping-box h3 {
+    font-family: "FabThread";
+    font-size: 18px;
+}
+.ship-payment-container .paymentMethod-box h3 {
+    font-family: "FabThread";
+    font-size: 18px;
+}
 .order-summery-price {
     width: 45%;
+}
+.order-summery-price .pricebox-heading{
+    font-family: "FabThread";
+    font-size: 18px;
 }
 hr.line-sep {
     border: 1px solid #eaeaec;
     border-left: none;
-    margin-top: 25px;
+    margin: 25px 0;
 }
 p.title {
     font-size: 3rem;

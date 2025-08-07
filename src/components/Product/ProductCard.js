@@ -14,7 +14,7 @@ function ProductCard({item}) {
     return (
         <div className={`item-column product-card product-card${hasBeenInView ? " visible" : ""}`} data-testid="product-card" ref={ref}>
             <Link className="item-url" to={productUrl} data-testid="product-url">
-                <img className="itemImg" src={itemImage ? itemImage : "imgNotFound.webp"} alt={itemName} />
+                <img className="itemImg" src={itemImage ? itemImage : "imgNotFound.webp"} alt={itemName} loading="lazy"/>
                 {userRatings?.length && 
                     <RatingWrapper rating={avgRating} />
                 }             

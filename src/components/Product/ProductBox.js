@@ -6,12 +6,14 @@ import { useSearchQuery } from "../../context/SearchProductContextApi";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useCategory } from "../Category/useCategory";
 import useSEO from "../../Hooks/useSEO";
+import { usePreloadImages } from "../../Hooks/usePreloadImages";
 
 const ProductBox = React.memo(function ProductBox() {
     const [imagesLoaded, setImagesLoaded] = useState();
     const [searchParams] = useSearchParams();
     const {searchQuery} = useSearchQuery();
     const {categoryName} = useParams();
+    const { preloadImages } = usePreloadImages();
     //Filter
     const brandParam = searchParams.get("brand")?.split("%");
     const colorParam = searchParams.get("color")?.split("%");
@@ -84,21 +86,6 @@ const ProductBox = React.memo(function ProductBox() {
         [searchQueryData, productData, productsList]
     );
 
-    
-    const preloadImages = useCallback((products) => {
-        if(!products.length) return Promise.resolve();
-        return Promise.all(
-            products?.map((product) => 
-                new Promise((resolve) => {
-                    const img = new Image();
-                    img.src = product.itemImage;
-                    img.onload = resolve;
-                    img.onerror = resolve;
-                })
-            )
-        )
-    }, [])
-    
     useEffect(() => {
         if(filteredData)
             preloadImages(filteredData).then(() => setImagesLoaded(true))

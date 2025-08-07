@@ -19,6 +19,7 @@ export async function getCurrentUserOrders(){
                             userId
                             productId
                             orderid
+                            paymentMethod
                             address{
                                 city
                                 state
