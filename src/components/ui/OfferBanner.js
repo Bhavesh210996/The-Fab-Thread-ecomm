@@ -4,7 +4,7 @@ function OfferBanner() {
     const navigate = useNavigate()
     return (
         <div className="homepage-offer-banner">
-            <img src="home-banner.webp" className="img-banner" alt="offer" />
+            <img src="home-banner.webp" className="img-banner" width={1200} height={500} alt="offer" />
             <div className="him-container" onClick={() => navigate("/men")}></div>
             <div className="him-box">
                 <button type="button" className="him-btn" onClick={() => navigate("/men")}>

@@ -90,7 +90,8 @@ label{
     width: 30%;
 }
 .login-banner{
-    width: 50vw;
+    width: 650px;
+    height: 600px;
 }
 .login-banner img{
     width: 100%;
