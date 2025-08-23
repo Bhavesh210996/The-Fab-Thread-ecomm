@@ -6,6 +6,7 @@ import Spinner from "../ui/Spinner";
 import AddressBox from "./AddressBox";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectAddress } from "../../context/CartSlice";
+import { useEffect } from "react";
 
 function AddressList() {
     // const {user} = useUser();
@@ -15,10 +16,13 @@ function AddressList() {
     const currentUseradd = {field:"userId" , value: user?.id}
     const {addreses, isAddressLoading} = useAddreses(currentUseradd);
 
-    if(isAddressLoading) return <Spinner />
-
+    
     const defaultAddress = addreses?.[0]?.id;
-    dispatch(setSelectAddress(defaultAddress));
+    useEffect(() => {
+        dispatch(setSelectAddress(defaultAddress));
+    }, [defaultAddress, dispatch])
+    
+    if(isAddressLoading) return <Spinner />
 
     return (
         <div className="addressList-box">

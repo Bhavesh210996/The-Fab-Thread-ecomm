@@ -26,6 +26,10 @@ function AddressBox({address, defaultAddress}) {
         }
     }, [address])
 
+    const handleSelectAddress = (e) => {
+        dispatch(setSelectAddress(e.target.value));
+    }
+
     function handleRemoveAddress(){
         deletetingAddressFn(address.id);
     }
@@ -34,9 +38,9 @@ function AddressBox({address, defaultAddress}) {
         <div className="addressBlock">
             <div>
                 <input type="radio" className="address-radio" 
-                    checked={selectedAddress ? Number(selectedAddress) === address.id : defaultAddress ? defaultAddress === address.id : false} 
+                    checked={Number(selectedAddress) === address.id} 
                     value={address.id} 
-                    onChange={() => dispatch(setSelectAddress(address.id))}
+                    onChange={handleSelectAddress}
                     aria-label="Select address"
                 />
             </div>
