@@ -37,6 +37,7 @@ function AddressBox({address, defaultAddress}) {
                     checked={selectedAddress ? Number(selectedAddress) === address.id : defaultAddress ? defaultAddress === address.id : false} 
                     value={address.id} 
                     onChange={() => dispatch(setSelectAddress(address.id))}
+                    aria-label="Select address"
                 />
             </div>
             <div>

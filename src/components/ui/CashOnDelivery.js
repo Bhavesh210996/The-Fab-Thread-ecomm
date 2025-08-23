@@ -5,7 +5,7 @@ function CashOnDelivery({setCodRadioSelected}) {
                 Cash on Delivery (Cash/UPI)
             </div>
             <div className="cod-payment-option">
-                <input type="radio" id="code-radio" value="cod" onChange={(e) => setCodRadioSelected(e.target.value)}/>
+                <input type="radio" id="code-radio" value="cod" onChange={(e) => setCodRadioSelected(e.target.value)} aria-label="cash on delivery"/>
                 <span>Cash On Delivery</span>
             </div>
         </div>

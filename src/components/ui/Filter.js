@@ -49,7 +49,7 @@ const Filter = React.memo(function Filter({filterData, type, filterField, produc
                             className="filter-checkbox" 
                             value={value} 
                             checked={searchParams.get(filterField) ? searchParams.get(filterField).includes(value) : false} 
-                            onChange={handleCheckbox} /> 
+                            onChange={handleCheckbox} aria-label={value} /> 
                             <span className="filter-value">{value}</span>
                             <span className="filter-qty">({products.filter((item) => item[filterField] === value).length})</span>
                     </div>)

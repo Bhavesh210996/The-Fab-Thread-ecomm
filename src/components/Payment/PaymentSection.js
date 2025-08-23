@@ -27,9 +27,10 @@ function PaymentSection({totalCartPrice}) {
     const {user} = useSelector((store) => store.cartStates);
     const {selectedAddress} = useSelector((store) => store.cartStates)
     const dispatch = useDispatch();
+    const currentUseradd = {field:"userId" , value: user?.id}
 
     const {orders, isLoading} = useOrders();
-    const {addreses} = useAddreses();
+    const {addreses} = useAddreses(currentUseradd);
     const findSelectedAddress = addreses?.filter((addreses) => addreses.id === Number(selectedAddress));
 
     const {cartEntries, isEntriesLoading} = useCartEntries();

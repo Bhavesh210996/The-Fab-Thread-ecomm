@@ -30,7 +30,7 @@ function SearchBox() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button className="btn search__btn" type="submit">
+        <button className="btn search__btn" type="submit" aria-label="Search">
           <HiMagnifyingGlass/>
           {/* <span>Search</span> */}
         </button>

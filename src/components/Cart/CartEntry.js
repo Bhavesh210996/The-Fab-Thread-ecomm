@@ -65,7 +65,7 @@ const CartEntry = memo(function CartEntry({item}) {
                         <button type="button" className="qty-minus-btn qty-update-btn" onClick={decreaseQty}>
                             -
                         </button>
-                        {!isAddingCart ? <input type="text" className="qty-input-field" value={itemQuantity} disabled/> : <SpinnerMini />}
+                        {!isAddingCart ? <input type="text" name="item Quantity" className="qty-input-field" value={itemQuantity} aria-label="quantity" disabled/> : <SpinnerMini />}
                         <button type="button" className="qty-plus-btn qty-update-btn" onClick={increaseQty} disabled={itemQuantity === availableQty}>
                             +
                         </button>
@@ -81,7 +81,7 @@ const CartEntry = memo(function CartEntry({item}) {
             <Modal>
                 <div className="remove-item">
                     <Modal.Open opens="delete">
-                        <button type="button" className="cross-btn"> <HiMiniXMark /> </button>
+                        <button type="button" className="cross-btn" aria-label="remove item"> <HiMiniXMark /> </button>
                     </Modal.Open>
 
                     <Modal.Window name="delete">
