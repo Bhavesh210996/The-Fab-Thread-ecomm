@@ -4,6 +4,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
 import React, { Suspense, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { Analytics } from '@vercel/analytics/react';
 
 import './App.css';
 import './style/style.css'
@@ -56,6 +57,7 @@ function App() {
       {/* <SelectAddressContextProvider> */}
       <MediaQueryContextProvider>
       <ReactQueryDevtools initialIsOpen={false} />
+      <Analytics />
       <BrowserRouter>
       <ScrollToTop />
       <Suspense fallback={<Spinner />}>
