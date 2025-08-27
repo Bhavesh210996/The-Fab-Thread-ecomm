@@ -7,6 +7,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useCategory } from "../Category/useCategory";
 import useSEO from "../../Hooks/useSEO";
 import { usePreloadImages } from "../../Hooks/usePreloadImages";
+import { useSelector } from "react-redux";
 
 const ProductBox = React.memo(function ProductBox() {
     const [imagesLoaded, setImagesLoaded] = useState();
@@ -14,6 +15,7 @@ const ProductBox = React.memo(function ProductBox() {
     const {searchQuery} = useSearchQuery();
     const {categoryName} = useParams();
     const { preloadImages } = usePreloadImages();
+    const {filterSearchQuery} = useSelector((store) => store.products);
     //Filter
     const brandParam = searchParams.get("brand")?.split("%");
     const colorParam = searchParams.get("color")?.split("%");
@@ -78,12 +80,32 @@ const ProductBox = React.memo(function ProductBox() {
         return data;
     }, [productsList, searchQuery, productData]);
 
+    //search filter results
+    const filteredProducts = useMemo(() => {
+        let data = filterSearchQuery ?  productData?.filter((item) => {
+            const queryTerms = filterSearchQuery.toLowerCase().split(" ").map(term => term.trim());
+
+            return queryTerms.every((term) => {
+                return(
+                    item.gender.toLowerCase().includes(term) ||
+                    item.color.toLowerCase().includes(term) ||
+                    item.brand.toLowerCase().includes(term) ||
+                    item.itemType.toLowerCase().includes(term) ||
+                    item.categoryName.toLowerCase().split("-")[1].includes(term)
+                )
+            })
+        }) : productData;
+        return data;
+    }, [filterSearchQuery, productData]);
+
     const filteredData = useMemo(() =>
+        filteredProducts?.length > 0 ? 
+        filteredProducts :
         searchQueryData?.length > 0 ? 
         searchQueryData : 
         productData?.length > 0 ? 
         productData : productsList,
-        [searchQueryData, productData, productsList]
+        [searchQueryData, productData, productsList, filteredProducts]
     );
 
     useEffect(() => {

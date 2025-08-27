@@ -4,6 +4,7 @@ import { getProductsList } from "../services/apiMenProducts"
 const initialState = {
     productsList: [],
     isProductsListLoading: false,
+    filterSearchQuery: ""
 }
 
 const productsSlice = createSlice({
@@ -16,10 +17,13 @@ const productsSlice = createSlice({
         },
         loader(state){
             state.isProductsListLoading = true;
+        },
+        setFilterSearchQuery(state, action){
+            state.filterSearchQuery = action.payload;
         }
     }
 })
-export const {setProductsList, loader} = productsSlice.actions;
+export const {setProductsList, loader, setFilterSearchQuery} = productsSlice.actions;
 export const fetchProductsList = () =>{
     return async function(dispatch){
         dispatch(loader())

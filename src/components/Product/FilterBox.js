@@ -4,6 +4,7 @@ import { shallowEqual, useSelector } from "react-redux";
 import Filter from "../ui/Filter";
 import { useSearchQuery } from "../../context/SearchProductContextApi";
 import React, { useMemo } from "react";
+import { SearchFilter } from "./SearchFilter";
 
 const FilterBox = React.memo(function FilterBox() {
     console.log("FilterBox rendered");
@@ -92,6 +93,7 @@ const FilterBox = React.memo(function FilterBox() {
              <p>Filters</p>
             </div>
             <div className="filters-container">
+                <SearchFilter />
                 <Filter type="brand" filterData={brandKey} filterField="brand" products={selectedBrandProducts ? selectedBrandProducts : filteredData}/>
                 <Filter type="color" filterData={colorsKey} filterField="color" products={selectedColorProducts ? selectedColorProducts : filteredData}/>
             </div>
