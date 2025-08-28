@@ -1,16 +1,25 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { setFilterSearchQuery } from "../../context/ProductsSlice";
+import { useEffect, useState } from "react";
 
 export const SearchFilter = () => {
-const {filterSearchQuery} = useSelector((store) => store.products);
-const dispatch = useDispatch();
+    const [query, setQuery] = useState("");
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            dispatch(setFilterSearchQuery(query));
+        }, 500);
+
+        return () => clearTimeout(timer);
+    }, [dispatch, query]);
 
     return(
         <input
             type="text"
             placeholder="Filter products..."
-            value={filterSearchQuery}
-            onChange={(e) => dispatch(setFilterSearchQuery(e.target.value))}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
         />
     )
 }
