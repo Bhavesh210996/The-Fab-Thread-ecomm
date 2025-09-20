@@ -2,23 +2,16 @@ import Spinner from "../ui/Spinner";
 import CategoryCard from "./CategoryCard";
 import { useCategory } from "./useCategory"
 import "../Category/category.css";
-import { useEffect, useState } from "react";
-import { usePreloadImages } from "../../Hooks/usePreloadImages";
+import { useMemo } from "react";
 
 function Category({genderType}) {
-    const [imagesLoaded, setImagesLoaded] = useState(false);
-    const {categories, isCategoriesLoading} = useCategory();
-    const { preloadImages } = usePreloadImages();
-    const filteredCategories = genderType ? categories?.filter((category) => category.gender === genderType) : 
-                                categories?.filter((category) => !category.gender);
+    const {categories} = useCategory();
+    const filteredCategories = useMemo(() => 
+                                genderType ? categories?.filter((category) => category.gender === genderType) : 
+                                categories?.filter((category) => !category.gender)
+                            , [genderType, categories])
 
-    useEffect(() => {
-        if(filteredCategories){
-            preloadImages(filteredCategories).then(() => setImagesLoaded(true));
-        }
-    }, [filteredCategories])
-
-    if(!imagesLoaded) return <Spinner />
+    if(filteredCategories <= 0) return <Spinner />
 
     return (
         <div className="category-base-container">

@@ -1,8 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Analytics } from '@vercel/analytics/react';
 
@@ -12,8 +11,6 @@ import './style/style.css'
 import ScrollToTop from './components/ui/ScrollToTop';
 
 import { SearchProductContextProvider } from './context/SearchProductContextApi';
-import { SelectAddressContextProvider } from './context/SelectAddressContextApi';
-import { CartEntryCountProvider } from './context/CartEntryCountContextApi';
 import { getUser } from './context/CartSlice';
 import { MediaQueryContextProvider } from './context/MediaQueryContextApi';
 import Spinner from './components/ui/Spinner';
@@ -45,19 +42,26 @@ const queryClient = new QueryClient({
 })
 
 function App() {
+  const [DevTools, setDevTools] = useState(null);
   const dispatch = useDispatch()
 
   useEffect(() => {
       dispatch(getUser());
   }, [dispatch])
-  
+
+  useEffect(() => {
+    if (process.env.NODE_ENV === "development") {
+      import("@tanstack/react-query-devtools").then((module) => {
+        setDevTools(() => module.ReactQueryDevtools);
+      });
+    }
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <SearchProductContextProvider>
-      {/* <CartEntryCountProvider> */}
-      {/* <SelectAddressContextProvider> */}
       <MediaQueryContextProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {DevTools && <DevTools initialIsOpen={false} />}
       <Analytics />
       <BrowserRouter>
       <ScrollToTop />
@@ -102,8 +106,6 @@ function App() {
         }
       }} />
       </MediaQueryContextProvider>
-    {/* </SelectAddressContextProvider> */}
-    {/* </CartEntryCountProvider> */}
     </SearchProductContextProvider>
     </QueryClientProvider>
   )

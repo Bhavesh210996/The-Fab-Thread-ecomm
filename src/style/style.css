@@ -411,6 +411,9 @@ input:disabled {
 }
 /* media query */
 @media (max-width: 1023px){
+  .homepage-welcome-note .homepage-welcome-text{
+    font-size: 50px
+  }
   .homepage-offer-banner{
     height: unset;
     margin: 0;
@@ -463,9 +466,10 @@ input:disabled {
   width: 5%;
   height: 0%;
 }
-/* .welcome-note-container{
-  height: 90vh;
+.homepage-welcome-note{
+  height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -476,16 +480,9 @@ input:disabled {
   padding: 0 1rem;
 }
 @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    } */
-
-.homepage-welcome-note {
-  position: absolute;
-  top: 158px;
-  left: 3%;
-  text-align: center;
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 .homepage-welcome-text {
   font-family: 'Poppins', sans-serif;
@@ -494,9 +491,9 @@ input:disabled {
   font-weight: bold;
   font-size: 67px;
   margin-bottom: 15px;
-  background: linear-gradient(90deg, #00d4ff, #7a5fff);
+  /* background: linear-gradient(90deg, #00d4ff, #7a5fff);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent; */
 }
 span.text-home {
   font-size: 30px;
