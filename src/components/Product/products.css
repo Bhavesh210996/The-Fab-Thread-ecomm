@@ -139,7 +139,32 @@ progress[data-rating="1"]::-webkit-progress-value{
 .product-card.visible {
   animation: fadeScaleIn 1s forwards;
 }
-
+.user-review-star-wrapper.star-5,
+.user-review-star-wrapper.star-4{
+    background-color: #14958f;
+}
+.user-review-star-wrapper.star-3{
+    background-color: #72bfbc;
+}
+.user-review-star-wrapper.star-2{
+    background-color: #fcb301;
+}
+.user-review-star-wrapper.star-1{
+    background-color: #f16565;
+}
+.pdp-review-star{
+    width: 9px;
+}
+.item-url .user-review-star-wrapper {
+    width: 35px;
+    height: 17px;
+    position: absolute;
+    bottom: 100px;
+    left: 10px;
+}
+.item-url .user-review-star-wrapper .pdp-review-star{
+    margin-left: 3px;
+}
 @keyframes fadeScaleIn {
   to {
     opacity: 1;

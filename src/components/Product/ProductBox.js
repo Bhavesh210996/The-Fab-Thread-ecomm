@@ -3,7 +3,7 @@ import Spinner from "../ui/Spinner";
 import ProductCard from "./ProductCard"
 import { useProductList } from "./useProductList"
 import { useSearchQuery } from "../../context/SearchProductContextApi";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useCategory } from "../Category/useCategory";
 import useSEO from "../../Hooks/useSEO";
 import { usePreloadImages } from "../../Hooks/usePreloadImages";

@@ -269,6 +269,7 @@
     }
     .category-page.mobile-mainContent .productBox{
         width: 100vw;
+        height: 90vh;
     }
     .category-page.mobile-mainContent .productBox .items-row .item-column{
         width: 50%;
