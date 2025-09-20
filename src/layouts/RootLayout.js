@@ -1,13 +1,13 @@
 import { Outlet } from "react-router-dom"
-import SidebarNav from "./Header/SidebarNav"
+import SidebarNav from "../components/Header/SidebarNav"
 import { useSelector } from "react-redux"
 import { useEffect } from "react";
 
-import SearchBox from "./Header/SearchBox";
+import SearchBox from "../components/Header/SearchBox";
 import { useResponsiveQuery } from "../context/MediaQueryContextApi";
-import Header from "./Header/Header";
+import Header from "../components/Header/Header";
 
-function AppLayout() {
+function RootLayout() {
     const {isSidebarOpen} = useSelector((store) => store.cartStates);
     const {isMobile} = useResponsiveQuery();
 
@@ -35,4 +35,4 @@ function AppLayout() {
     )
 }
 
-export default AppLayout
+export default RootLayout;

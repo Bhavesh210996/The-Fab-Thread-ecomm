@@ -17,11 +17,12 @@ import { CartEntryCountProvider } from './context/CartEntryCountContextApi';
 import { getUser } from './context/CartSlice';
 import { MediaQueryContextProvider } from './context/MediaQueryContextApi';
 import Spinner from './components/ui/Spinner';
+import ProtectedLayout from './layouts/ProtectedLayout';
+import AppLayout from './layouts/AppLayout';
+import Header from './components/Header/Header';
 
 const Homepage = React.lazy(() => import('./pages/Homepage'));
 const ProductListingPage = React.lazy(() => import('./pages/category-pages/ProductListingPage'));
-const AppLayout = React.lazy(() => import('./components/AppLayout'));
-const ProtectedRoute = React.lazy(() => import('./components/ui/ProtectedRoute'));
 const MenFashion = React.lazy(() => import('./pages/MenFashion'));
 const WomenFashion = React.lazy(() => import('./pages/WomenFashion'));
 const ProductDetailsPage = React.lazy(() => import('./pages/ProductDetailsPage'));
@@ -60,25 +61,25 @@ function App() {
       <Analytics />
       <BrowserRouter>
       <ScrollToTop />
+      <Header />
       <Suspense fallback={<Spinner />}>
 
         <Routes>
-
-          <Route element={<AppLayout />}>
-            <Route index element={<Homepage />} />
-            <Route path=':categoryName' element={<ProductListingPage />} />
-            <Route path='men' element={<MenFashion />} />
-            <Route path='women' element={<WomenFashion />} />
-            <Route path=':productType/:brand/:productName/:productId' element={<ProductDetailsPage />} />
-          </Route>
-          <Route element={<ProtectedRoute> <AppLayout /> </ProtectedRoute>}>
-            <Route path='cart' element={<Cart />} />
-            <Route path='address' element={<Address />} />
-            <Route path='payment' element={<Payment />} />
-            <Route path='orderConfirmation/:orderId' element={<OrderConfirmation />} />
-            <Route path='orders' element={<YourOrders />} />
-            <Route path='profile' element={<Profile />} />
-          </Route>
+            <Route element={<AppLayout />}>
+              <Route index element={<Homepage />} />
+              <Route path=':categoryName' element={<ProductListingPage />} />
+              <Route path='men' element={<MenFashion />} />
+              <Route path='women' element={<WomenFashion />} />
+              <Route path=':productType/:brand/:productName/:productId' element={<ProductDetailsPage />} />
+            </Route>
+            <Route element={<ProtectedLayout />}>
+              <Route path='cart' element={<Cart />} />
+              <Route path='address' element={<Address />} />
+              <Route path='payment' element={<Payment />} />
+              <Route path='orderConfirmation/:orderId' element={<OrderConfirmation />} />
+              <Route path='orders' element={<YourOrders />} />
+              <Route path='profile' element={<Profile />} />
+            </Route>
           <Route path='login' element={<Login />} />
           <Route path='signup' element={<SignUp />} />
             
