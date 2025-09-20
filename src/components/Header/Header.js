@@ -19,16 +19,12 @@ function Header() {
     }, [isSidebarOpen])
 
     return (
-        <div className="container">
+        <div className="header-container">
             {isMobile && <SidebarNav />}
             <header className="header">            
                 <NavBar />
             </header>
-            {isMobile && 
-                <div className="mobile-search-box">
-                    <SearchBox />
-                </div>
-            }
+            
         </div>
     )
 }

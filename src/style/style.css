@@ -141,8 +141,12 @@ body.no-scroll{
     transform: rotate(1turn);
   }
 } */
+.header-container{
+  height: 60px;
+  flex-shrink: 0;
+}
 main{
-  margin-top: 60px;
+  flex: 1;
 }
 .spinner {
   margin: 12rem auto;
@@ -407,9 +411,6 @@ input:disabled {
 }
 /* media query */
 @media (max-width: 1023px){
-  .homepage{
-    margin-top: 135px;
-  }
   .homepage-offer-banner{
     height: unset;
     margin: 0;
@@ -449,11 +450,6 @@ input:disabled {
   }
   form.search input{
     width: 17rem;
-  }
-}
-@media (max-width: 1023px){
-  .mobile-mainContent{
-      margin-top: 133px;
   }
 }
 .user-review-star-wrapper {

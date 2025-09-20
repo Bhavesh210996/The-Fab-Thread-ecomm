@@ -324,12 +324,7 @@ nav.mobile-nav .header__logo {
     pointer-events: auto;
 }
 .mobile-search-box {
-    position: fixed;
     padding: 16px 8px;
-    z-index: 1;
-    background: #fff;
-    width: 100%;
-    top: 60px;
 }
 .mobile-search-box .search{
     padding: 0;
