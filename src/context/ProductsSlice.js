@@ -24,12 +24,5 @@ const productsSlice = createSlice({
     }
 })
 export const {setProductsList, loader, setFilterSearchQuery} = productsSlice.actions;
-export const fetchProductsList = () =>{
-    return async function(dispatch){
-        dispatch(loader())
-        const data = await getProductsList()
-        dispatch(setProductsList(data))
-    }
-}
 
 export default productsSlice.reducer;

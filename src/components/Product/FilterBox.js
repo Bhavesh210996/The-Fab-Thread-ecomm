@@ -7,7 +7,6 @@ import React, { useMemo } from "react";
 import { SearchFilter } from "./SearchFilter";
 
 const FilterBox = React.memo(function FilterBox() {
-    console.log("FilterBox rendered");
     const [searchParams] = useSearchParams();
     const {searchQuery} = useSearchQuery();
     const {categoryName} = useParams();
@@ -23,49 +22,15 @@ const FilterBox = React.memo(function FilterBox() {
     }, [colorParamRaw]);
 
     //fetch the product data
-    const productsList = useSelector((store) => store.products.productsList, shallowEqual);
+    const {productsList} = useSelector((store) => store.products);
 
     const productData = useMemo(() => {
-        const categoryFilter = productsList?.filter(item => item.categoryName === categoryName.toLowerCase());
+        const categoryFilter = productsList?.filter(item => item.categoryName === categoryName?.toLowerCase());
         let data = categoryFilter?.length > 0 ? categoryFilter : productsList;
-
-        if(categoryFilter?.length <= 0){
-            data = categoryName ? data?.filter((item) => {
-                const querySplit = categoryName.toLowerCase()
-                                    .replace(/-/g, ' ') 
-                                    .replace(/\s+/g, ' ')
-                                    .trim();
-                const queryTerms = querySplit.replace(/\bt\s?shirt\b/g, 't-shirt').split(" ").map(term => term.trim());
-
-                return queryTerms.every((term) => {
-                    return(
-                        item.gender.toLowerCase() === term ||
-                        item.itemType.toLowerCase() === term
-                    )
-                })
-            }) : "";
-        }
         return data;
     }, [productsList, categoryName]);
 
-    //search results
-    const searchQueryData = useMemo(() => {
-        let data = searchQuery ? productsList?.filter((item) => {
-        const queryTerms = searchQuery.toLowerCase().split(" ").map(term => term.trim());
-    
-        return queryTerms.every((term) => {
-            return (
-              item.gender.toLowerCase() === term ||
-              item.categoryName.toLowerCase().split("-")[1] === term ||
-              item.itemType.toLowerCase() === term
-            );
-          });
-        }) : productData;
-
-        return data;
-    }, [searchQuery, productsList, productData]);
-
-    const filteredData = searchQueryData?.length > 0 ? searchQueryData : productData?.length > 0 ? productData : productsList;
+    const filteredData = productData?.length > 0 ? productData : productsList;
 
     //filter by brand
     let selectedBrandProducts;

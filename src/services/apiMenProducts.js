@@ -19,6 +19,36 @@ export async function getProductsList(filterValue = []){
         return data;
 }
 
+export async function getProductsListByCategory(category = ""){
+    const {data, error} = await supabase
+    .from("products")
+    .select("*")
+    .eq("categoryName", category)
+
+    if(error){
+        console.log(error.message);
+        throw new Error(error.message);
+    }
+    if(data && data.length > 0) return data;
+
+    const terms = category.split("-");
+    const genderTerm = terms[0];
+    const itemTypeTerm = terms.slice(1).join("-");
+
+   const { data: products, error: err } = await supabase
+    .from("products")
+    .select("*")
+    .eq("gender", genderTerm)
+    .eq("itemType", itemTypeTerm)
+
+    if(err){
+        console.log(err.message);
+        throw new Error(err.message);
+    }
+    return products && products.length > 0 ? products : [];
+}
+
+
 export async function setItemRating(newRating, id){
     //fetching the data for product based on product id
     const {data, error: fetchError} = await supabase
@@ -90,4 +120,47 @@ export async function updateProductQuantity(itemsQtyArray){
     if(updateError){
         throw new Error(updateError.message)
     }
+}
+
+export async function fetchSuggestions(searchQuery = ""){
+
+    const terms = searchQuery.toLowerCase().split(" ").map((t) => t.trim()).filter(t => t.length > 2);
+
+    const orConditions = terms
+    .map(
+      (term) =>
+        `itemName.ilike.%${term}%,itemType.ilike.%${term}%,brand.ilike.%${term}%,color.ilike.%${term}%,categoryName.ilike.%${term}%`
+    )
+    .join(",");
+
+    const {data, error} = await supabase
+    .from("products")
+    .select("*")
+    .or(orConditions)
+    // .limit(5)
+
+    if(error){
+        console.log(error.message);
+        throw new Error(error.message);
+    }
+    const suggestions = data.reduce((acc, curr) => {
+        if(!acc.some(item => item.itemType === curr.itemType && item.gender === curr.gender)){
+            acc.push(curr)
+        }
+        return acc
+    }, [])
+    return suggestions;
+}
+
+export async function fetchAllMAtchingProducts(selectedQuery = ""){
+    const { data, error } = await supabase
+    .from("products")
+    .select("*")
+    .textSearch("search_vector", selectedQuery, {
+      type: "plain",
+      config: "english",
+    });
+
+  if (error) console.error(error);
+  return data;
 }

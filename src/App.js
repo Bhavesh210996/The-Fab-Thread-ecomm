@@ -71,7 +71,8 @@ function App() {
         <Routes>
             <Route element={<AppLayout />}>
               <Route index element={<Homepage />} />
-              <Route path=':categoryName' element={<ProductListingPage />} />
+              <Route path='category/:categoryName' element={<ProductListingPage />} />
+              <Route path=':searchQuery' element={<ProductListingPage />} />
               <Route path='men' element={<MenFashion />} />
               <Route path='women' element={<WomenFashion />} />
               <Route path=':productType/:brand/:productName/:productId' element={<ProductDetailsPage />} />

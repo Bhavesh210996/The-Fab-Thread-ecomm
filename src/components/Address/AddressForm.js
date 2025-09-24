@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import { useNewAddress } from "./useNewAddress";
-import { useUser } from "../Authentication/useUser";
 import { useEditAddress } from "./useEditAddress";
 import { usePinCodeData } from "../Cart/usePinCodeData";
 import SpinnerMini from "../ui/SpinnerMini";
@@ -18,7 +17,6 @@ function AddressForm({editFormData = {}, setFormData, editId, onCloseModal}) {
 
     const {pincodeDataFn, isPinCodeLoading, data: pincodeData} = usePinCodeData();
     const {addNewAddressFn, isPending: isAddressAdding} = useNewAddress();
-    // const {user} = useUser();
     const {user} = useSelector((store) => store.cartStates);
     const {editAddress, isAddressEditing} = useEditAddress();
 
@@ -30,6 +28,13 @@ function AddressForm({editFormData = {}, setFormData, editId, onCloseModal}) {
     useFocus(ref)
     useBlur(ref)
 
+    //to get the pinconde data in edit session
+    useEffect(() => {
+        if(editSession && pincode){
+            pincodeDataFn(pincode)
+        }
+    }, [editSession, pincode])
+    
     // to get the pincode data for selected pincode
     useEffect(() => {
         function handleBlur(){
@@ -41,7 +46,6 @@ function AddressForm({editFormData = {}, setFormData, editId, onCloseModal}) {
             if(value?.length === 6 ){
                 pincodeDataFn(value, {
                     onSuccess: (data) => {
-                        console.log("pincodeData", data)
                         if(data?.[0].Status !== "Error"){
                             if(editSession){
                                 setFormData((prevData) => ({
@@ -128,31 +132,26 @@ function AddressForm({editFormData = {}, setFormData, editId, onCloseModal}) {
             <div className="address-details">
                 <label className="label-text">Address</label>
 
+                <FormRow>
+                    <Input type="text" name="houseNo" placeholder="Address(House No, Building, Street, Area)*" elRef={(el) => (ref.current[2] = el)} value={houseNo} onChange={handleChange}/>
+                    <FormError>Required</FormError>
+                </FormRow>
+
                 <FormRow className="pincode-box">
                     <Input type="text" name="pincode" placeholder="Pincode*" elRef={pincodeRef} value={pincode} onChange={handleChange}/>
                     <FormError>Required</FormError>
                     {isPinCodeLoading && <SpinnerMini />}
                 </FormRow>
 
-                <FormRow>
-                    <Input type="text" name="houseNo" placeholder="Address(House No, Building, Street, Area)*" elRef={(el) => (ref.current[2] = el)} value={houseNo} onChange={handleChange}/>
-                    <FormError>Required</FormError>
-                </FormRow>
-
-                {!pincodeData?.[0]?.PostOffice ? (
-                    <FormRow>
-                        <Input type="text" name="locality" placeholder="Locality/Town*" elRef={(el) => (ref.current[3] = el)} value={locality} onChange={handleChange}/>
-                        <FormError>Required</FormError>
-                    </FormRow>
-                ) : (
+                {pincodeData?.[0]?.PostOffice &&
                 <select id="locality-drpdwn" className="add-input-field" name="locality" placeholder="Locality/Town*">
                     {pincodeData?.[0]?.PostOffice.map((town, index) => 
-                        <option key={index}>{town.Name}</option>
+                        <option key={index} selected={locality === town.Name}>{town.Name}</option>
                         )}
                 </select>
-                )}
+                }
 
-                <div className="add-city-state">
+                {(city || pincodeData?.[0].PostOffice?.[0].Block) && <div className="add-city-state">
                     <FormRow>
                         <Input type="text" name="city" elRef={(el) => (ref.current[4] = el)} value={city ? city : pincodeData?.[0].PostOffice?.[0].Block || ""} placeholder="City/District*" readOnly />
                         <FormError>Required</FormError>
@@ -162,7 +161,7 @@ function AddressForm({editFormData = {}, setFormData, editId, onCloseModal}) {
                         <Input type="text" name="state" elRef={(el) => (ref.current[5] = el)} value={state? state : pincodeData?.[0]?.PostOffice?.[0].State || ""} placeholder="State*" readOnly/>
                         <FormError>Required</FormError>
                     </FormRow>
-                </div>
+                </div>}
             </div>
             <div className="add-new-add-btn">
                 <button type="submit" id="new-add-submit-btn">
