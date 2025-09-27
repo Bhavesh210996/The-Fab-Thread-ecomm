@@ -4,7 +4,7 @@ import { HiMagnifyingGlass } from "react-icons/hi2";
 import { useFetchSuggestions } from "../Product/useFetchSuggestions";
 import { useFetchAllMatchingProducts } from "../Product/useFetchAllMatchingProducts";
 import { useDispatch } from "react-redux";
-import { setProductsList } from "../../context/ProductsSlice";
+import { loader, setProductsList } from "../../context/ProductsSlice";
 
 const SearchBox = React.memo(function SearchBox() {
   const [query, setQuery] = useState("");
@@ -84,6 +84,7 @@ const SearchBox = React.memo(function SearchBox() {
       setIsSelected(true);
       setQuery(value)
       setSearchQuery(value.replace(/ /g, '-'))
+      dispatch(loader())
       fetchAllMAtchingProductsFn(value, {
         onSuccess: (data) => {
           dispatch(setProductsList(data))

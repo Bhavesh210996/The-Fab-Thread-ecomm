@@ -7,7 +7,7 @@ import "../../components/Product/products.css";
 import "../../components/Category/category.css";
 import FilterBox from "../../components/Product/FilterBox";
 import ProductBox from "../../components/Product/ProductBox";
-import { setProductsList } from "../../context/ProductsSlice";
+import { loader, setProductsList } from "../../context/ProductsSlice";
 import MobileFilterBox from "../../components/Product/MobileFilterBox";
 import { toggleFilterSideBar } from "../../context/CartSlice";
 import { useParams } from "react-router-dom";
@@ -22,11 +22,12 @@ function ProductListingPage() {
     const {searchQuery} = useParams();
     const {getProductsListByCategoryFn, isPending} = useProductsByCategory();
     const {fetchAllMAtchingProductsFn, productsLoading} = useFetchAllMatchingProducts();
-    const {productsList, loader} = useSelector((store) => store.products);
+    const {productsList, isProductsListLoading} = useSelector((store) => store.products);
 
     //Filter
     useEffect(() => {
         if(categoryName){
+            dispatch(loader());
             getProductsListByCategoryFn(categoryName, {
                 onSuccess: (data) => { 
                     dispatch(setProductsList(data));
@@ -37,6 +38,7 @@ function ProductListingPage() {
 
     useEffect(() => {
         if(searchQuery && productsList.length <= 0){
+            dispatch(loader());
             const val = searchQuery.replace(/-/g, ' ');
             fetchAllMAtchingProductsFn(val, {
                 onSuccess: (data) => {
@@ -46,7 +48,7 @@ function ProductListingPage() {
         }
     }, [])
 
-    if(isPending || productsLoading || loader) return <Spinner />
+    if(isPending || productsLoading || isProductsListLoading) return <Spinner />
 
     return (
         <div className="category-page mobile-mainContent">

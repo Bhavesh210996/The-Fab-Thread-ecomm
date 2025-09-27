@@ -11,13 +11,12 @@ function Category({genderType}) {
                                 categories?.filter((category) => !category.gender)
                             , [genderType, categories])
 
-    if(filteredCategories <= 0) return <Spinner />
-
     return (
         <div className="category-base-container">
+            {(!filteredCategories || filteredCategories?.length <= 0) ? <Spinner /> : 
             <div className="row-compo">
                 {filteredCategories?.map((category) => <CategoryCard key={category.id} category={category} />)}
-            </div>
+            </div>}
         </div>
     )
 }

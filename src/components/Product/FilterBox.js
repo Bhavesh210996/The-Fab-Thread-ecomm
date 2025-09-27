@@ -1,14 +1,13 @@
 import { useParams, useSearchParams } from "react-router-dom";
-import { shallowEqual, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import Filter from "../ui/Filter";
-import { useSearchQuery } from "../../context/SearchProductContextApi";
 import React, { useMemo } from "react";
 import { SearchFilter } from "./SearchFilter";
+import Spinner from "../ui/Spinner";
 
 const FilterBox = React.memo(function FilterBox() {
     const [searchParams] = useSearchParams();
-    const {searchQuery} = useSearchQuery();
     const {categoryName} = useParams();
 
     //Filter
@@ -22,7 +21,7 @@ const FilterBox = React.memo(function FilterBox() {
     }, [colorParamRaw]);
 
     //fetch the product data
-    const {productsList} = useSelector((store) => store.products);
+    const {productsList, isProductsListLoading} = useSelector((store) => store.products);
 
     const productData = useMemo(() => {
         const categoryFilter = productsList?.filter(item => item.categoryName === categoryName?.toLowerCase());
@@ -51,6 +50,8 @@ const FilterBox = React.memo(function FilterBox() {
     }else{
         colorsKey = [...new Set(filteredData?.map((item) => item?.color))]
     }
+
+    if(isProductsListLoading) return <Spinner />
 
     return (
         <div className="filterBox">

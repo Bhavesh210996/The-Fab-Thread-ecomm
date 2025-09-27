@@ -12,7 +12,7 @@ const ProductBox = React.memo(function ProductBox() {
     const [searchParams] = useSearchParams();
     const {categoryName} = useParams();
     const { preloadImages } = usePreloadImages();
-    const {filterSearchQuery, productsList} = useSelector((store) => store.products);
+    const {filterSearchQuery, productsList, isProductsListLoading} = useSelector((store) => store.products);
     //Filter
     const brandParam = searchParams.get("brand")?.split("%");
     const colorParam = searchParams.get("color")?.split("%");
@@ -49,7 +49,7 @@ const ProductBox = React.memo(function ProductBox() {
 
     //search filter results
     const filteredProducts = useMemo(() => {
-        let data = filterSearchQuery ?  productData?.filter((item) => {
+        let data = filterSearchQuery !== "" ?  productData?.filter((item) => {
             const queryTerms = filterSearchQuery.toLowerCase().split(" ").map(term => term.trim());
 
             return queryTerms.every((term) => {
@@ -63,7 +63,7 @@ const ProductBox = React.memo(function ProductBox() {
             })
         }) : productData;
         return data;
-    }, [filterSearchQuery]);
+    }, [filterSearchQuery, productData]);
 
     const filteredData = useMemo(() =>
         paramsFilteredData?.length > 0 ? 
@@ -75,18 +75,18 @@ const ProductBox = React.memo(function ProductBox() {
         [productData, productsList, paramsFilteredData, filteredProducts]
     );
 
-    useEffect(() => {
-        if(filteredData)
-            preloadImages(filteredData).then(() => setImagesLoaded(true))
-    }, [filteredData, preloadImages])
-
-    if(!imagesLoaded) return <Spinner />
+    // useEffect(() => {
+    //     if(filteredData)
+    //         preloadImages(filteredData).then(() => setImagesLoaded(true))
+    // }, [filteredData, preloadImages])
 
     return (
         <div className="productBox">
+            { (isProductsListLoading) ? <Spinner /> :
             <div className="items-row">
                 {filteredData?.map((item) => <ProductCard key={item.id} item={item}/>)}
             </div>
+            }
         </div>
     )
 })
