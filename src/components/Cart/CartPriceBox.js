@@ -39,7 +39,7 @@ const CartPriceBox = memo(function CartPriceBox({type, setTotalCartPrice}) {
                     </div>
                     {type !== "order" &&
                     <Button
-                        onClick={() => navigate(`/${type}`)} type="cart">
+                        onClick={() => navigate(`/${type}`)} type="cart" disabled={type !== "address" && !selectedAddress}>
                         {type === "address" ? "Place order" : "Continue"}
                     </Button>}
                 </div>

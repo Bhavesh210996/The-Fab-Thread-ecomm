@@ -1,7 +1,6 @@
 import Modal from "../ui/Modal"
 import AddressForm from "./AddressForm"
 import { useAddreses } from "./useAddreses";
-import { useUser } from "../Authentication/useUser";
 import Spinner from "../ui/Spinner";
 import AddressBox from "./AddressBox";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +8,6 @@ import { setSelectAddress } from "../../context/CartSlice";
 import { useEffect } from "react";
 
 function AddressList() {
-    // const {user} = useUser();
     const dispatch = useDispatch();
     const {user} = useSelector((store) => store.cartStates);
 
@@ -18,6 +16,7 @@ function AddressList() {
 
     
     const defaultAddress = addreses?.[0]?.id;
+
     useEffect(() => {
         dispatch(setSelectAddress(defaultAddress));
     }, [defaultAddress, dispatch])
@@ -26,7 +25,7 @@ function AddressList() {
 
     return (
         <div className="addressList-box">
-            <Modal>
+            <Modal initialOpen={!addreses || addreses.length <= 0 ? "newadd" : ""}>
                 <div className="add-new-address-box">
                     <h3>Select Delivery Address</h3>
                     <Modal.Open opens="newadd">
